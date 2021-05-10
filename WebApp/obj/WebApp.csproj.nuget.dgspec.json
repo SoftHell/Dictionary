@@ -47,6 +47,10 @@
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.5, )"
             }
           },
           "imports": [
@@ -196,6 +200,10 @@
               "version": "[5.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.Extensions.Identity.Stores": {
               "target": "Package",
               "version": "[5.0.5, )"
             },

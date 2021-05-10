@@ -2322,7 +2322,8 @@
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "Domain": "1.0.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5"
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.5"
         },
         "compile": {
           "bin/placeholder/DAL.dll": {}
@@ -7854,6 +7855,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.5",
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.5",
+      "Microsoft.Extensions.Identity.Stores >= 5.0.5",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2"
     ]
   },
@@ -7928,6 +7930,10 @@
             "version": "[5.0.5, )"
           },
           "Microsoft.EntityFrameworkCore.Tools": {
+            "target": "Package",
+            "version": "[5.0.5, )"
+          },
+          "Microsoft.Extensions.Identity.Stores": {
             "target": "Package",
             "version": "[5.0.5, )"
           },

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
+    public class AppDbContext : IdentityDbContext
     {
         public DbSet<Language> Languages { get; set; } = default!;
         
@@ -32,10 +32,6 @@ namespace DAL
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
             
-            builder.Entity<Word>()
-                .HasMany(m => m.Equivalents)
-                .WithOne(o => o.QueryWord!)
-                .OnDelete(DeleteBehavior.Cascade);
 
         }
         
