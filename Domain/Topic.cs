@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
-    public class Category
+    public class Topic
     {
         public Guid Id { get; set; }
         
