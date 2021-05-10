@@ -7865,11 +7865,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kadri\\Development\\Telia\\Dictionary\\WebApp\\WebApp.csproj",
+      "projectUniqueName": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\WebApp\\WebApp.csproj",
       "projectName": "WebApp",
-      "projectPath": "C:\\Users\\Kadri\\Development\\Telia\\Dictionary\\WebApp\\WebApp.csproj",
+      "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\WebApp\\WebApp.csproj",
       "packagesPath": "C:\\Users\\Kadri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kadri\\Development\\Telia\\Dictionary\\WebApp\\obj\\",
+      "outputPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\WebApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Kadri\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7886,11 +7886,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Kadri\\Development\\Telia\\Dictionary\\DAL\\DAL.csproj": {
-              "projectPath": "C:\\Users\\Kadri\\Development\\Telia\\Dictionary\\DAL\\DAL.csproj"
+            "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\DAL\\DAL.csproj": {
+              "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\DAL\\DAL.csproj"
             },
-            "C:\\Users\\Kadri\\Development\\Telia\\Dictionary\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\Kadri\\Development\\Telia\\Dictionary\\Domain\\Domain.csproj"
+            "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj"
             }
           }
         }

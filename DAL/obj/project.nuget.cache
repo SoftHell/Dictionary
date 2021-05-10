@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "D0kLMO1+SUOYdGu6nFq5w8cYj3ZSr1l2He4bYUoyNg0uYheQ1KRjisqHdrH9FY+nJw6xgC+cn8jho/QtZuE/VQ==",
+  "dgSpecHash": "K+cgjmfGhpWHXMCvXkgurDbsuQUY0LvnM3JDSG/pDzswcQqZuJRILBNP3r8Fi9nrT8vujJHAvuL6Ipy/JMZcuQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Kadri\\Development\\Telia\\Dictionary\\DAL\\DAL.csproj",
+  "projectFilePath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\DAL\\DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kadri\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.5\\microsoft.aspnetcore.cryptography.internal.5.0.5.nupkg.sha512",
     "C:\\Users\\Kadri\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.5\\microsoft.aspnetcore.cryptography.keyderivation.5.0.5.nupkg.sha512",

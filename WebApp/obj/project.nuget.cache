@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v6EzoKKTt6xyinzIULabT44mcz/TS9MNwPdpxN2xV3W19p4y3BovuD9cm+ZHeilA7jZHGEJUddyvQpPWLi/EaA==",
+  "dgSpecHash": "3To28tdWwemPz8dtbOaCH0OSkX+mnTaoQpnn29e30ywKmiC0FEUdvGVp+BQ8YQfsnvAEReKSsE76QThbyiADQg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Kadri\\Development\\Telia\\Dictionary\\WebApp\\WebApp.csproj",
+  "projectFilePath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\WebApp\\WebApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kadri\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Kadri\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.5\\microsoft.aspnetcore.authentication.jwtbearer.5.0.5.nupkg.sha512",
