@@ -22,6 +22,10 @@ namespace Domain
         
         [MaxLength(64)] public Topic? Topic { get; set; } = default!;
         
+        public Guid? QueryWordId { get; set; }
+        
+        public Word? QueryWord { get; set; } = default!;
+        
         public ICollection<Word>? Equivalents { get; set; } = default!;
 
     }
