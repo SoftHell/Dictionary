@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.Pronunciation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.QueryWord.Value)
+                @Html.DisplayFor(modelItem => item.QueryWord!.Value)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using WebApp.Helpers;
 
@@ -80,6 +83,25 @@ namespace WebApp
                     });
                 }
             );
+            
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var appSupportedCultures = new[]
+                {
+                    new CultureInfo("et"),
+                    new CultureInfo("en")
+                };
+                options.SupportedCultures = appSupportedCultures;
+                options.SupportedUICultures = appSupportedCultures;
+                options.DefaultRequestCulture = new RequestCulture("et", "et");
+                options.SetDefaultCulture("et");
+                options.RequestCultureProviders = new List<IRequestCultureProvider>()
+                {
+                    new QueryStringRequestCultureProvider(),
+                    new CookieRequestCultureProvider()
+                };
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,6 +125,12 @@ namespace WebApp
             app.UseCors("CorsAllowAll");
 
             app.UseRouting();
+            
+            app.UseRequestLocalization(
+                app.ApplicationServices
+                    .GetService<IOptions<RequestLocalizationOptions>>()?.Value
+            );
+
 
             app.UseAuthentication();
             app.UseAuthorization();

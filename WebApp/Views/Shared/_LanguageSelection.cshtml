@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.Extensions.Options
+@inject IOptions<RequestLocalizationOptions> LocalizationOptions
+
+@{
+    var cultureItems = LocalizationOptions.Value.SupportedUICultures
+        .Select(c => new {Value = c.Name, Text = c.NativeName}).ToList();
+}
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        @Resources.Views.Shared.Layout.Language
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        @foreach (var item in cultureItems)
+        {
+            <a class="nav-link nav-dropdown-link text-dark" asp-area="" asp-controller="Home" asp-action="SetLanguage" asp-route-culture="@item.Value" asp-route-returnUrl="@Context.Request.Path@Context.Request.QueryString">@item.Text</a>
+            
+        }
+    </div>
+
+</li>

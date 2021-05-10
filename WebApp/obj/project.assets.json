@@ -2344,6 +2344,16 @@
         "runtime": {
           "bin/placeholder/Domain.dll": {}
         }
+      },
+      "Resources/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Resources.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Resources.dll": {}
+        }
       }
     }
   },
@@ -7842,6 +7852,11 @@
       "type": "project",
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
+    },
+    "Resources/1.0.0": {
+      "type": "project",
+      "path": "../Resources/Resources.csproj",
+      "msbuildProject": "../Resources/Resources.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7856,7 +7871,8 @@
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.5",
       "Microsoft.Extensions.Identity.Stores >= 5.0.5",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
+      "Resources >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -7891,6 +7907,9 @@
             },
             "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj": {
               "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj"
+            },
+            "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Resources\\Resources.csproj": {
+              "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Resources\\Resources.csproj"
             }
           }
         }

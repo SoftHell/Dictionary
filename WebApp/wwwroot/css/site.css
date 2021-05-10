@@ -26,14 +26,6 @@ a {
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
 
 .border-top {
   border-top: 1px solid #e5e5e5;
@@ -61,11 +53,383 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  /*background-color: #bcc5c6;*/
+  /*background-color: #839ba0;  Dark Teal */
+  background-color: #f8f9fa;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.control-label {
+  font-weight: bold;
+}
+
+.logo {
+  width: 460px;
+  height: 400px;
+}
+
+.logo-text {
+  font-family: "Segoe Script", sans-serif;
+  font-weight: bold;
+  color: whitesmoke;
+  padding: 80px;
+}
+
+
+.menu-bar {
+  font-size: large;
+  background: #17a2b8;
+  color: mintcream;
+}
+
+.text-light {
+  color: white;
+  font-size: x-large;
+}
+.text-light, .text-dark {
+  text-transform: capitalize;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+.add-button, .icon-button {
+  color: #33373b;
+  opacity: 0.9;
+}
+
+.add-button, .close-button, .edit-button {
+  float: right;
+}
+
+
+li, dt, dd, .info-box, .dropdown-menu, .padded {
+  padding: 15px;
+}
+
+dt, dd {
+  border: 1px lightgray;
+}
+
+h1, .nav-item, .nav-link {
+  text-transform: none;
+}
+
+.info-box {
+  border-radius: 0.5rem;
+}
+
+.content-container {
+  background: rgba(200,200,180,0.9);
+}
+
+
+.align-center-custom {
+  align-items: center;
+  align-content: center;
+}
+
+.padded-lg {
+  padding: 40px;
+}
+
+.hobby-group-logo {
+  height: 150px;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+@font-face {
+  font-family: "BeachSunshine";
+url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype");
+}
+
+.home-heading {
+  color: #0c5460;
+  font-family: "Century Gothic", sans-serif;
+
+}
+
+.nav-dropdown-link {
+  font-size: 15px;
+
+}
+
+.detail-heading {
+  text-align: center;
+}
+
+.index-heading {
+  text-align: center;
+  font-style: normal;
+  color: #343a40;
+  justify-content: center;
+  font-size: xx-large;
+}
+
+/*====================== ICON BUTTONS =======================*/
+
+.icon-add {
+  background: url("/WebApp/wwwroot/css/img/plus.svg");
+  width: 20px;
+  height: 20px;
+  background-size: 30px 30px;
+}
+
+.icon {
+  opacity: 0.8;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-lg {
+  width: 30px;
+  height: 30px;
+}
+
+.icon-right {
+  float: right;
+}
+
+/*==========================================================*/
+/*============== SIZE RESPONSIVE ELEMENTS ==================*/
+/*==========================================================*/
+
+
+/*============== XXS ==================*/
+
+@media (min-width: 16px) {
+  .logo-text {
+    font-size: 20px;
+  }
+
+  tbody, thead, a, dt, dd, .btn, .form-group, .form-control {
+    font-size: 8px;
+  }
+  header {
+    font-size: 10px;
+  }
+  h1 {
+    font-size: 15px;
+  }
+  h2, .nav-link, .nav-item {
+    font-size: 13px;
+  }
+  h3 {
+    font-size: 11px;
+  }
+  h4 {
+    font-size: 10px;
+  }
+
+  .btn {
+    height: 25px;
+    width: 90px;
+  }
+
+  .logo-div {
+    display:none;
+  }
+
+  .info-box {
+    column-width: max-content;
+  }
+
+  .nav-dropdown-link {
+    font-size: 12px;
+
+  }
+
+}
+
+/*============== XS ==================*/
+
+@media (min-width: 200px) {
+  .logo-text {
+    font-size: 40px;
+  }
+  .add-button {
+    font-size: 25px;
+  }
+  tbody, thead, a, dt, dd, .btn, .form-group, .form-control {
+    font-size: 14px;
+  }
+  header {
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 20px;
+  }
+  h2, .nav-link, .nav-item {
+    font-size: 18px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  h4 {
+    font-size: 14px;
+  }
+
+  .btn {
+    height: 35px;
+    width: 100px;
+  }
+  .nav-link, .nav-item {
+    font-size: 15px;
+    padding: 5px;
+  }
+  .logo-div {
+    display:none;
+  }
+  .info-box {
+    column-width: max-content;
+  }
+  .nav-dropdown-link {
+    font-size: 12px;
+
+  }
+}
+
+/*============== S ==================*/
+
+@media (min-width: 768px) {
+
+  .logo-text {
+    font-size: 60px;
+  }
+
+  tbody, thead, a, dt, dd, .btn, .form-group, .form-control {
+    font-size: 16px;
+  }
+  header {
+    font-size: 18px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  h2, .nav-link, .nav-item {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+
+  .btn {
+    height: 40px;
+    width: 110px;
+  }
+  .nav-link, .nav-item {
+    font-size: 18px;
+    padding: 6px;
+  }
+  .logo-div {
+    display: contents;
+  }
+  .logo {
+    width: 310px;
+    height: 280px;
+  }
+}
+
+/*============== M ==================*/
+
+@media (min-width: 992px) {
+
+  .logo-text {
+    font-size: 80px;
+  }
+  tbody, thead, a, dt, dd, .btn, .form-group, .form-control {
+    font-size: 18px;
+  }
+  header {
+    font-size: 20px;
+  }
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 25px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+
+  .btn {
+    height: 45px;
+    width: 130px;
+  }
+  .nav-link, .nav-item {
+    font-size: 20px;
+    padding: 7px;
+  }
+
+  .logo-div {
+    display: contents;
+  }
+  .logo {
+    width: 360px;
+    height: 330px;
+  }
+}
+
+/*============== L ==================*/
+
+@media (min-width: 1200px) {
+
+  .logo-text {
+    font-size: 100px;
+  }
+
+  tbody, thead, a, dt, dd, .btn, .form-group, .form-control, .user-dropdown-item {
+    font-size: 20px;
+  }
+  header {
+    font-size: 22px;
+  }
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 26px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  .btn {
+    height: 50px;
+    width: 140px;
+  }
+  .nav-link, .nav-item {
+    font-size: 22px;
+  }
+
+  .logo-div {
+    display: contents;
+  }
+  .logo {
+    width: 470px;
+    height: 430px;
+  }
+
+  .nav-dropdown-link {
+    font-size: 16px;
+  }
 }
