@@ -9,6 +9,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{D1CDE88E-066C-4D20-BB87-BB2145771356}"
 ProjectSection(SolutionItems) = preProject
 	Directory.Build.props = Directory.Build.props
+	.gitignore = .gitignore
 EndProjectSection
 EndProject
 Global
