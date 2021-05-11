@@ -1548,13 +1548,24 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "Microsoft.Extensions.Identity.Stores": "5.0.5"
+          "Microsoft.Extensions.Identity.Stores": "5.0.5",
+          "Resources": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Domain.dll": {}
         },
         "runtime": {
           "bin/placeholder/Domain.dll": {}
+        }
+      },
+      "Resources/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Resources.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Resources.dll": {}
         }
       }
     }
@@ -5866,6 +5877,11 @@
       "type": "project",
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
+    },
+    "Resources/1.0.0": {
+      "type": "project",
+      "path": "../Resources/Resources.csproj",
+      "msbuildProject": "../Resources/Resources.csproj"
     }
   },
   "projectFileDependencyGroups": {

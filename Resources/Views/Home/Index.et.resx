@@ -29,4 +29,10 @@
     <data name="FuzzyMatch" xml:space="preserve">
         <value>Hägune vaste</value>
     </data>
+    <data name="InsertKeyword" xml:space="preserve">
+        <value>Sisesta otsingusõna</value>
+    </data>
+    <data name="Search" xml:space="preserve">
+        <value>Otsi</value>
+    </data>
 </root>

@@ -11,6 +11,13 @@
     <title>@ViewData["Title"] - Wordy</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="~/css/all.css"/>
+    <link rel="stylesheet" href="~/css/brands.css"/>
+    <link rel="stylesheet" href="~/css/fontawesome.css"/>
+    <link rel="stylesheet" href="~/css/regular.css"/>
+    <link rel="stylesheet" href="~/css/solid.css"/>
+    <link rel="stylesheet" href="~/css/svg-with-js.css"/>
+    <link rel="stylesheet" href="~/css/v4-shims.css"/>
 </head>
 <body>
 <header>
@@ -30,11 +37,19 @@
                             </svg>
                         </a>
                     </li>
-                    
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        
-                    }
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="nav-link nav-dropdown-link text-dark" asp-area="" asp-controller="Word" asp-action="Index">@Resources.Views.Shared.Layout.Word</a>
+                            <a class="nav-link nav-dropdown-link text-dark" asp-area="" asp-controller="Language" asp-action="Index">@Resources.Views.Shared.Layout.Language</a>
+                            <a class="nav-link nav-dropdown-link text-dark" asp-area="" asp-controller="PartOfSpeech" asp-action="Index">@Resources.Views.Shared.Layout.PartOfSpeech</a>
+                            <a class="nav-link nav-dropdown-link text-dark" asp-area="" asp-controller="Topic" asp-action="Index">@Resources.Views.Shared.Layout.Topic</a>
+                        </div>
+                    </li>
                     <partial name="_LanguageSelection"/>
                     
                 </ul>

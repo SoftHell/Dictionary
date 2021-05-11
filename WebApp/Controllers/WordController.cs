@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DAL;
 using Domain;
+using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
@@ -46,28 +47,124 @@ namespace WebApp.Controllers
         }
 
         // GET: Word/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(WordViewModel? viewModel)
         {
-            ViewData["QueryWordId"] = new SelectList(_context.Words, "Id", "Value");
-            return View();
+            if (viewModel == null)
+            {
+                var vm = new WordViewModel()
+                {
+                    TopicSelectList =
+                        new SelectList(await _context.Topics
+                                .Include(t => t.Name)
+                                .ThenInclude(n => n.Translations)
+                                .ToListAsync(),
+                            nameof(Topic.Id), nameof(Topic.Name)),
+
+                    PartOfSpeechSelectList =
+                        new SelectList(await _context.PartsOfSpeech
+                                .Include(t => t.Name)
+                                .ThenInclude(n => n.Translations)
+                                .ToListAsync(),
+                            nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name)),
+                };
+                return View(vm);
+            }
+
+            viewModel.TopicSelectList =
+                new SelectList(await _context.Topics
+                        .Include(t => t.Name)
+                        .ThenInclude(n => n.Translations)
+                        .ToListAsync(),
+                    nameof(Topic.Id), nameof(Topic.Name));
+
+            viewModel.PartOfSpeechSelectList =
+                new SelectList(await _context.PartsOfSpeech
+                        .Include(t => t.Name)
+                        .ThenInclude(n => n.Translations)
+                        .ToListAsync(),
+                    nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name));
+            
+            return View(viewModel);
         }
+
+        // GET: Word/AddEquivalent
+        public async Task<IActionResult> AddEquivalent(WordViewModel vm, string equivalent)
+        {
+            vm.Equivalents!.Add(equivalent);
+            
+            vm.TopicSelectList =
+                new SelectList(await _context.Topics
+                        .Include(t => t.Name)
+                        .ThenInclude(n => n.Translations)
+                        .ToListAsync(),
+                    nameof(Topic.Id), nameof(Topic.Name), nameof(vm.Word.TopicId));
+
+            vm.PartOfSpeechSelectList =
+                new SelectList(await _context.PartsOfSpeech
+                        .Include(t => t.Name)
+                        .ThenInclude(n => n.Translations)
+                        .ToListAsync(),
+                    nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name), nameof(vm.Word.PartOfSpeechId));
+
+            return RedirectToAction(nameof(Create), new {viewModel = vm});
+            
+        }
+       
 
         // POST: Word/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Value,Example,Explanation,Pronunciation,QueryWordId")] Word word)
+        public async Task<IActionResult> CreateWord(WordViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                word.Id = Guid.NewGuid();
-                _context.Add(word);
+                
+                /*if (vm.LanguageName == (int) ELanguage.En)
+                {
+                    var equivalent = new Word()
+                    {
+                        Value = vm.EstonianValue,
+                        Language = ELanguage.Et,
+                        PartOfSpeechId = vm.Word!.PartOfSpeechId,
+                        TopicId = vm.Word!.TopicId
+                    };
+                    var savedEquivalent = await _context.Words.AddAsync(equivalent);
+                    
+                    var word = vm.Word;
+                    word!.Value = vm.Value;
+                    word.QueryWordId = savedEquivalent.Entity.Id;
+
+                }*/
+                
+                _context.Add(vm.Word);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["QueryWordId"] = new SelectList(_context.Words, "Id", "Value", word.QueryWordId);
-            return View(word);
+
+            vm.TopicSelectList =
+                new SelectList(await _context.Topics
+                        .Include(t => t.Name)
+                        .ThenInclude(n => n.Translations)
+                        .ToListAsync(),
+                    nameof(Topic.Id), nameof(Topic.Name));
+
+            vm.PartOfSpeechSelectList =
+                new SelectList(await _context.PartsOfSpeech
+                        .Include(t => t.Name)
+                        .ThenInclude(n => n.Translations)
+                        .ToListAsync(),
+                    nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name));
+
+            vm.LanguageSelectList =
+                new SelectList(await _context.Languages
+                        .Include(t => t.Name)
+                        .ThenInclude(n => n.Translations)
+                        .ToListAsync(),
+                    nameof(Language.Id), nameof(Language.Name));
+            
+            return RedirectToAction(nameof(Create), new {viewModel = vm});
         }
 
         // GET: Word/Edit/5

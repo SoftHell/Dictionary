@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
+using DAL.DataInit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -107,6 +108,8 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            SetupAppData(app, Configuration);
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -142,6 +145,18 @@ namespace WebApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+
+        private static void SetupAppData(IApplicationBuilder app, IConfiguration configuration)
+        {
+            using var serviceScope =
+                app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            using var ctx = serviceScope.ServiceProvider.GetService<AppDbContext>();
+
+            if (!configuration.GetValue<bool>("AppData:SeedData")) return;
+            Console.Write("Seed database");
+            AppDataInit.SeedAppData(ctx!);
+            Console.WriteLine(" - done");
         }
     }
 }

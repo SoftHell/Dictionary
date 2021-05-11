@@ -36,4 +36,10 @@
     <data name="FuzzyMatch" xml:space="preserve">
         <value>Fuzzy Match</value>
     </data>
+    <data name="InsertKeyword" xml:space="preserve">
+        <value>Insert Keyword</value>
+    </data>
+    <data name="Search" xml:space="preserve">
+        <value>Search</value>
+    </data>
 </root>

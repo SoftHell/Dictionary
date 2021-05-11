@@ -21,6 +21,30 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Index.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Views\Word\Create.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Create.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="CRUDCommon.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>CRUDCommon.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Common.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Common.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="ViewModels\WordViewModel.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>WordViewModel.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Views\DTONames.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>DTONames.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Views\Word\SelectLanguage.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>SelectLanguage.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -43,6 +67,36 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Index.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Views\Word\Create.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Create.resx</DependentUpon>
+      </Compile>
+      <Compile Update="CRUDCommon.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>CRUDCommon.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Common.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Common.resx</DependentUpon>
+      </Compile>
+      <Compile Update="ViewModels\WordViewModel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>WordViewModel.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Views\DTONames.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>DTONames.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Views\Word\SelectLanguage.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SelectLanguage.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

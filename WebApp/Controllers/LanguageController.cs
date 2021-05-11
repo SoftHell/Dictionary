@@ -22,7 +22,10 @@ namespace WebApp.Controllers
         // GET: Language
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Languages.ToListAsync());
+            var appDbContext = _context.Languages
+                .Include(l => l.Name)
+                .ThenInclude(x => x.Translations);
+            return View(await appDbContext.ToListAsync());
         }
 
         // GET: Language/Details/5
@@ -34,6 +37,8 @@ namespace WebApp.Controllers
             }
 
             var language = await _context.Languages
+                .Include(l => l.Name)
+                .ThenInclude(x => x.Translations)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (language == null)
             {
@@ -46,6 +51,7 @@ namespace WebApp.Controllers
         // GET: Language/Create
         public IActionResult Create()
         {
+            ViewData["NameId"] = new SelectList(_context.LangStrings, "Id", "Id");
             return View();
         }
 
@@ -54,7 +60,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Language language)
+        public async Task<IActionResult> Create([Bind("Id,NameId")] Language language)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +69,7 @@ namespace WebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["NameId"] = new SelectList(_context.LangStrings, "Id", "Id", language.NameId);
             return View(language);
         }
 
@@ -74,11 +81,13 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            var language = await _context.Languages.FindAsync(id);
+            var language = await _context.Languages
+                .FindAsync(id);
             if (language == null)
             {
                 return NotFound();
             }
+            ViewData["NameId"] = new SelectList(_context.LangStrings, "Id", "Id", language.Name);
             return View(language);
         }
 
@@ -87,7 +96,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name")] Language language)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,NameId")] Language language)
         {
             if (id != language.Id)
             {
@@ -114,6 +123,7 @@ namespace WebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["NameId"] = new SelectList(_context.LangStrings, "Id", "Id", language.Name);
             return View(language);
         }
 
@@ -126,6 +136,7 @@ namespace WebApp.Controllers
             }
 
             var language = await _context.Languages
+                .Include(l => l.Name)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (language == null)
             {

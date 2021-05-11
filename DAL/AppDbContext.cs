@@ -17,6 +17,10 @@ namespace DAL
         
         public DbSet<Word> Words { get; set; } = default!;
         
+        public DbSet<LangString> LangStrings { get; set; } = default!;
+        
+        public DbSet<Translation> Translations { get; set; } = default!;
+        
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
@@ -31,6 +35,9 @@ namespace DAL
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
+            
+            builder.Entity<Translation>()
+                .HasKey(k => new { k.Culture, k.LangStringId});
             
 
         }

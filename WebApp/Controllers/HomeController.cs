@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebApp.Models;
+using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
@@ -22,8 +23,28 @@ namespace WebApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var vm = new SearchViewModel();
+            
+            return View(vm);
         }
+        
+        // POST: Word/Search
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Search(SearchViewModel vm)
+        {
+
+            if (ModelState.IsValid)
+            {
+                
+            }
+
+            return Ok();
+        }
+        
+        
 
         public IActionResult Privacy()
         {

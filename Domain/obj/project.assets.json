@@ -129,6 +129,16 @@
         "runtime": {
           "lib/netcoreapp3.0/Microsoft.Extensions.Primitives.dll": {}
         }
+      },
+      "Resources/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Resources.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Resources.dll": {}
+        }
       }
     }
   },
@@ -358,11 +368,17 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Resources/1.0.0": {
+      "type": "project",
+      "path": "../Resources/Resources.csproj",
+      "msbuildProject": "../Resources/Resources.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "Microsoft.Extensions.Identity.Stores >= 5.0.5"
+      "Microsoft.Extensions.Identity.Stores >= 5.0.5",
+      "Resources >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -391,7 +407,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Resources\\Resources.csproj": {
+              "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Resources\\Resources.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

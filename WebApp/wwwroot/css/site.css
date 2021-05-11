@@ -53,9 +53,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  /*background-color: #bcc5c6;*/
-  /*background-color: #839ba0;  Dark Teal */
-  background-color: #f8f9fa;
+  /*background-color: #f2f2f2;*/
 }
 
 .footer {
@@ -176,10 +174,32 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   font-size: xx-large;
 }
 
+.main-heading {
+  letter-spacing: 15px;
+}
+
+.form-box {
+  padding: 40px;
+  background-color: #f2f2f2;
+  border-radius: 0.8rem;
+}
+.heading-container {
+  position: relative;
+  text-align: center;
+}
+
+.company-logo-heading {
+  position: relative;
+  top: 20px;
+  font-size: 100px;
+  
+}
+
+
+
 /*====================== ICON BUTTONS =======================*/
 
 .icon-add {
-  background: url("/WebApp/wwwroot/css/img/plus.svg");
   width: 20px;
   height: 20px;
   background-size: 30px 30px;
@@ -218,6 +238,9 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   header {
     font-size: 10px;
   }
+  .company-logo-heading {
+    font-size: 20px;
+  }
   h1 {
     font-size: 15px;
   }
@@ -236,10 +259,6 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
     width: 90px;
   }
 
-  .logo-div {
-    display:none;
-  }
-
   .info-box {
     column-width: max-content;
   }
@@ -247,6 +266,9 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   .nav-dropdown-link {
     font-size: 12px;
 
+  }
+  .heading-container {
+    display: none;
   }
 
 }
@@ -265,6 +287,9 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   }
   header {
     font-size: 16px;
+  }
+  .company-logo-heading {
+    font-size: 30px;
   }
   h1 {
     font-size: 20px;
@@ -287,15 +312,16 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
     font-size: 15px;
     padding: 5px;
   }
-  .logo-div {
-    display:none;
-  }
+  
   .info-box {
     column-width: max-content;
   }
   .nav-dropdown-link {
     font-size: 12px;
 
+  }
+  .heading-container {
+    display: none;
   }
 }
 
@@ -312,6 +338,9 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   }
   header {
     font-size: 18px;
+  }
+  .company-logo-heading {
+    font-size: 50px;
   }
   h1 {
     font-size: 22px;
@@ -334,12 +363,13 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
     font-size: 18px;
     padding: 6px;
   }
-  .logo-div {
-    display: contents;
-  }
+  
   .logo {
     width: 310px;
     height: 280px;
+  }
+  .heading-container {
+    display: none;
   }
 }
 
@@ -355,6 +385,9 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   }
   header {
     font-size: 20px;
+  }
+  .company-logo-heading {
+    font-size: 75px;
   }
   h1 {
     font-size: 30px;
@@ -377,13 +410,13 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
     font-size: 20px;
     padding: 7px;
   }
-
-  .logo-div {
-    display: contents;
-  }
+  
   .logo {
     width: 360px;
     height: 330px;
+  }
+  .heading-container {
+    display: contents;
   }
 }
 
@@ -400,6 +433,9 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   }
   header {
     font-size: 22px;
+  }
+  .company-logo-heading {
+    font-size: 100px;
   }
   h1 {
     font-size: 40px;
@@ -421,9 +457,6 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
     font-size: 22px;
   }
 
-  .logo-div {
-    display: contents;
-  }
   .logo {
     width: 470px;
     height: 430px;
@@ -431,5 +464,8 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
 
   .nav-dropdown-link {
     font-size: 16px;
+  }
+  .heading-container {
+    display: contents;
   }
 }

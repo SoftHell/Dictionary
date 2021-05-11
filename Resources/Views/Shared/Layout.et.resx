@@ -20,4 +20,13 @@
     <data name="Language" xml:space="preserve">
         <value>Keelevalik</value>
     </data>
+    <data name="PartOfSpeech" xml:space="preserve">
+        <value>Sõnaliik</value>
+    </data>
+    <data name="Topic" xml:space="preserve">
+        <value>Teema</value>
+    </data>
+    <data name="Word" xml:space="preserve">
+        <value>Sõnad</value>
+    </data>
 </root>

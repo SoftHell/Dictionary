@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2dPZI7zn3m0c2llWmEkr0q61ieUwXTXpV8bfZiw43zAxKxF9qj1ceUIkUzuh3iZyvSI/ROHPyRdHE/2Tah+3Vw==",
+  "dgSpecHash": "mGfG6cZk/8WU/H0Cz8rPmBfrWE4EImLu6e+PkPhe8cSxRGO+0GbkFZgpjW6j5EartWO7UhHZtMEhZNoqzTwfWw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\WebApp\\WebApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Kadri\\.nuget\\packages\\fontawesome\\4.7.0\\fontawesome.4.7.0.nupkg.sha512",
     "C:\\Users\\Kadri\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Kadri\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.5\\microsoft.aspnetcore.authentication.jwtbearer.5.0.5.nupkg.sha512",
     "C:\\Users\\Kadri\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.5\\microsoft.aspnetcore.cryptography.internal.5.0.5.nupkg.sha512",

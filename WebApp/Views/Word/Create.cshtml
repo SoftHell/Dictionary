@@ -1,52 +1,84 @@
-@model Domain.Word
+@model WebApp.ViewModels.WordViewModel
 
-@{
-    ViewData["Title"] = "Create";
-}
+<h1>@Resources.CRUDCommon.CreateNew</h1>
 
-<h1>Create</h1>
-
-<h4>Word</h4>
+<h4>@Resources.Views.DTONames.Word</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <div class="col-md-8">
+        <form asp-action="AddEquivalent">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3 form-check form-check-inline">
+                <input asp-for="Word!.Language" class="form-check-input" type="radio" name="inlineRadioOptions" id="selectEst" value="1" checked>
+                <label asp-for="Word!.Language" class="form-check-label" for="selectEst">@Resources.Views.Home.Index.EST</label>
+                <span asp-validation-for="Word!.Language" class="text-danger"></span>
+            </div>
+            <div class="mb-3 form-check form-check-inline">
+                <input asp-for="Word!.Language" class="form-check-input" type="radio" name="inlineRadioOptions" id="selectEng" value="0">
+                <label asp-for="Word!.Language" class="form-check-label" for="selectEng">@Resources.Views.Home.Index.ENG</label>
+            </div>
+            
+            
             <div class="form-group">
-                <label asp-for="Value" class="control-label"></label>
-                <input asp-for="Value" class="form-control" />
+                <label asp-for="Word!.Value" class="control-label"></label>
+                <input asp-for="Word!.Value" class="form-control" placeholder="@Resources.Views.Word.Create.InsertNewWord"/>
                 <span asp-validation-for="Value" class="text-danger"></span>
             </div>
+            
+            @*<form asp-action="AddEquivalent">
+                @if (Model.Equivalents!.Count < 1)
+                {
+                    <div class="input-group mb-3">
+                        <input asp-for="Equivalent" type="text" class="form-control" placeholder="@Resources.Views.Word.Create.InsertEquivalent" aria-label="@Resources.Views.Word.Create.InsertEquivalent" aria-describedby="button-addon2">
+                        <span asp-validation-for="Value" class="text-danger"></span>
+                        <input type="submit" asp-route-vm="@Model" asp-route-equivalent="@Model.Equivalent" class="btn btn-outline-secondary" id="button-addon2" value="@Resources.Views.Word.Create.Add"/>
+                    </div>
+                }
+                else
+                {
+                    <div class="input-group mb-3">
+                        <label asp-for="Equivalents" class="control-label"></label>
+                        <input asp-for="Equivalent" class="form-control" placeholder="@Resources.Views.Word.Create.InsertEquivalent"/>
+                        <input class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" value="@Resources.Views.Word.Create.Equivalents"/>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            @foreach (var equivalent in Model.Equivalents!)
+                            {
+                                <li>@equivalent</li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </form>*@
+            
+            <div class="input-group mb-3">
+                <span class="input-group-text">@Resources.Views.Word.Create.PartOfSpeech</span>
+                <select type="text" class="form-control" placeholder="@Resources.Views.Word.Create.PartOfSpeech" aria-label="PartOfSpeech" asp-for="Word!.PartOfSpeechId" asp-items="Model.PartOfSpeechSelectList">
+                    <option value="">@Resources.CRUDCommon.SelectItem</option>
+                </select>
+                <span class="input-group-text">@Resources.Views.Word.Create.Topic</span>
+                <select type="text" class="form-control" placeholder="@Resources.Views.Word.Create.Topic" aria-label="Topic" asp-for="Word!.TopicId" asp-items="Model.TopicSelectList">
+                    <option value="">@Resources.CRUDCommon.SelectItem</option>
+                </select>
+            </div>
             <div class="form-group">
-                <label asp-for="Example" class="control-label"></label>
-                <input asp-for="Example" class="form-control" />
+                <label asp-for="Word!.Example" class="control-label"></label>
+                <textarea asp-for="Word!.Example" class="form-control"></textarea>
                 <span asp-validation-for="Example" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Explanation" class="control-label"></label>
-                <input asp-for="Explanation" class="form-control" />
+                <label asp-for="Word!.Explanation" class="control-label"></label>
+                <textarea asp-for="Word!.Explanation" class="form-control"></textarea>
                 <span asp-validation-for="Explanation" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Pronunciation" class="control-label"></label>
-                <input asp-for="Pronunciation" class="form-control" />
-                <span asp-validation-for="Pronunciation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="QueryWordId" class="control-label"></label>
-                <select asp-for="QueryWordId" class ="form-control" asp-items="ViewBag.QueryWordId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="@Resources.Views.Word.Create.Continue" class="btn btn-primary"/>
             </div>
         </form>
     </div>
 </div>
-
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@Resources.CRUDCommon.BackToList</a>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

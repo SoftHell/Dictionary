@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210510111520_Initial")]
+    [Migration("20210511115724_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,18 +21,32 @@ namespace DAL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Domain.LangString", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LangStrings");
+                });
+
             modelBuilder.Entity("Domain.Language", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
+                    b.Property<int>("Abbreviation")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("NameId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NameId");
 
                     b.ToTable("Languages");
                 });
@@ -43,12 +57,17 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
+                    b.Property<Guid?>("AbbreviationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("NameId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AbbreviationId");
+
+                    b.HasIndex("NameId");
 
                     b.ToTable("PartsOfSpeech");
                 });
@@ -59,14 +78,35 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
+                    b.Property<Guid>("NameId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("NameId");
+
                     b.ToTable("Topics");
+                });
+
+            modelBuilder.Entity("Domain.Translation", b =>
+                {
+                    b.Property<string>("Culture")
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<Guid>("LangStringId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(10240)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Culture", "LangStringId");
+
+                    b.HasIndex("LangStringId");
+
+                    b.ToTable("Translations");
                 });
 
             modelBuilder.Entity("Domain.Word", b =>
@@ -83,15 +123,15 @@ namespace DAL.Migrations
                         .HasMaxLength(1024)
                         .HasColumnType("nvarchar(1024)");
 
-                    b.Property<Guid?>("LanguageId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Language")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("PartOfSpeechId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Pronunciation")
-                        .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
 
                     b.Property<Guid?>("QueryWordId")
                         .HasColumnType("uniqueidentifier");
@@ -105,8 +145,6 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LanguageId");
 
                     b.HasIndex("PartOfSpeechId");
 
@@ -317,13 +355,59 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.Word", b =>
+            modelBuilder.Entity("Domain.Language", b =>
                 {
-                    b.HasOne("Domain.Language", "Language")
+                    b.HasOne("Domain.LangString", "Name")
                         .WithMany()
-                        .HasForeignKey("LanguageId")
+                        .HasForeignKey("NameId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Name");
+                });
+
+            modelBuilder.Entity("Domain.PartOfSpeech", b =>
+                {
+                    b.HasOne("Domain.LangString", "Abbreviation")
+                        .WithMany()
+                        .HasForeignKey("AbbreviationId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("Domain.LangString", "Name")
+                        .WithMany()
+                        .HasForeignKey("NameId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Abbreviation");
+
+                    b.Navigation("Name");
+                });
+
+            modelBuilder.Entity("Domain.Topic", b =>
+                {
+                    b.HasOne("Domain.LangString", "Name")
+                        .WithMany()
+                        .HasForeignKey("NameId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Name");
+                });
+
+            modelBuilder.Entity("Domain.Translation", b =>
+                {
+                    b.HasOne("Domain.LangString", "LangString")
+                        .WithMany("Translations")
+                        .HasForeignKey("LangStringId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("LangString");
+                });
+
+            modelBuilder.Entity("Domain.Word", b =>
+                {
                     b.HasOne("Domain.PartOfSpeech", "PartOfSpeech")
                         .WithMany()
                         .HasForeignKey("PartOfSpeechId")
@@ -338,8 +422,6 @@ namespace DAL.Migrations
                         .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Language");
 
                     b.Navigation("PartOfSpeech");
 
@@ -397,6 +479,11 @@ namespace DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.LangString", b =>
+                {
+                    b.Navigation("Translations");
                 });
 
             modelBuilder.Entity("Domain.Word", b =>

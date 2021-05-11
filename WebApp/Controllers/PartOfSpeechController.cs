@@ -22,7 +22,10 @@ namespace WebApp.Controllers
         // GET: PartOfSpeech
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PartsOfSpeech.ToListAsync());
+            var appDbContext = _context.PartsOfSpeech
+                .Include(p => p.Name)
+                .ThenInclude(x => x.Translations);
+            return View(await appDbContext.ToListAsync());
         }
 
         // GET: PartOfSpeech/Details/5
@@ -34,6 +37,8 @@ namespace WebApp.Controllers
             }
 
             var partOfSpeech = await _context.PartsOfSpeech
+                .Include(p => p.Name)
+                .ThenInclude(x => x.Translations)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (partOfSpeech == null)
             {
@@ -46,6 +51,7 @@ namespace WebApp.Controllers
         // GET: PartOfSpeech/Create
         public IActionResult Create()
         {
+            ViewData["NameId"] = new SelectList(_context.LangStrings, "Id", "Id");
             return View();
         }
 
@@ -54,7 +60,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] PartOfSpeech partOfSpeech)
+        public async Task<IActionResult> Create([Bind("Id,NameId")] PartOfSpeech partOfSpeech)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +69,7 @@ namespace WebApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["NameId"] = new SelectList(_context.LangStrings, "Id", "Id", partOfSpeech.NameId);
             return View(partOfSpeech);
         }
 
@@ -79,6 +86,7 @@ namespace WebApp.Controllers
             {
                 return NotFound();
             }
+            ViewData["NameId"] = new SelectList(_context.LangStrings, "Id", "Id", partOfSpeech.NameId);
             return View(partOfSpeech);
         }
 
@@ -87,7 +95,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name")] PartOfSpeech partOfSpeech)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,NameId")] PartOfSpeech partOfSpeech)
         {
             if (id != partOfSpeech.Id)
             {
@@ -114,6 +122,7 @@ namespace WebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["NameId"] = new SelectList(_context.LangStrings, "Id", "Id", partOfSpeech.NameId);
             return View(partOfSpeech);
         }
 
@@ -126,6 +135,7 @@ namespace WebApp.Controllers
             }
 
             var partOfSpeech = await _context.PartsOfSpeech
+                .Include(p => p.Name)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (partOfSpeech == null)
             {

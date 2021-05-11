@@ -1,0 +1,68 @@
+﻿<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Equivalent" xml:space="preserve">
+        <value>Vaste</value>
+    </data>
+    <data name="Equivalents" xml:space="preserve">
+        <value>Vasted</value>
+    </data>
+    <data name="Example" xml:space="preserve">
+        <value>Näide</value>
+    </data>
+    <data name="Explanation" xml:space="preserve">
+        <value>Selgitus</value>
+    </data>
+    <data name="Language" xml:space="preserve">
+        <value>Keel</value>
+    </data>
+    <data name="PartOfSpeech" xml:space="preserve">
+        <value>Sõnaliik</value>
+    </data>
+    <data name="Pronunciation" xml:space="preserve">
+        <value>Hääldus</value>
+    </data>
+    <data name="Topic" xml:space="preserve">
+        <value>Teema</value>
+    </data>
+    <data name="Value" xml:space="preserve">
+        <value>Väärtus</value>
+    </data>
+    <data name="AddWord" xml:space="preserve">
+        <value>Lisa sõna</value>
+    </data>
+    <data name="Test" xml:space="preserve">
+        <value>Test</value>
+    </data>
+    <data name="EnglishValue" xml:space="preserve">
+        <value>Inglise keeles</value>
+    </data>
+    <data name="EstonianValue" xml:space="preserve">
+        <value>Eesti keeles</value>
+    </data>
+    <data name="SourceLanguage" xml:space="preserve">
+        <value>Lähtekeel</value>
+    </data>
+    <data name="InsertNewWord" xml:space="preserve">
+        <value>Sisesta uus sõna või fraas</value>
+    </data>
+    <data name="InsertEquivalent" xml:space="preserve">
+        <value>Sisesta vaste</value>
+    </data>
+    <data name="Add" xml:space="preserve">
+        <value>Lisa</value>
+    </data>
+    <data name="Continue" xml:space="preserve">
+        <value>Edasi</value>
+    </data>
+</root>

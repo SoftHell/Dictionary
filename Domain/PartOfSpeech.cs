@@ -7,6 +7,11 @@ namespace Domain
     {
         public Guid Id { get; set; }
         
-        [MaxLength(32)] public string Name { get; set; } = default!;
+        public Guid NameId { get; set; }
+        [MaxLength(32)] public LangString Name { get; set; } = default!;
+        
+        public Guid? AbbreviationId { get; set; }
+        
+        [MaxLength(6)] public LangString? Abbreviation { get; set; } = default!;
     }
 }

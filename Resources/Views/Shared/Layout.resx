@@ -27,4 +27,13 @@
     <data name="Language" xml:space="preserve">
         <value>Language</value>
     </data>
+    <data name="PartOfSpeech" xml:space="preserve">
+        <value>Part of Speech</value>
+    </data>
+    <data name="Topic" xml:space="preserve">
+        <value>Topic</value>
+    </data>
+    <data name="Word" xml:space="preserve">
+        <value>Words</value>
+    </data>
 </root>

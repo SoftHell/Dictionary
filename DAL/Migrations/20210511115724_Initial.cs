@@ -47,39 +47,14 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Languages",
+                name: "LangStrings",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Languages", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PartsOfSpeech",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PartsOfSpeech", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Topics",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Topics", x => x.Id);
+                    table.PrimaryKey("PK_LangStrings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,28 +164,103 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Languages",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NameId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Abbreviation = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Languages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Languages_LangStrings_NameId",
+                        column: x => x.NameId,
+                        principalTable: "LangStrings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PartsOfSpeech",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NameId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AbbreviationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PartsOfSpeech", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PartsOfSpeech_LangStrings_AbbreviationId",
+                        column: x => x.AbbreviationId,
+                        principalTable: "LangStrings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PartsOfSpeech_LangStrings_NameId",
+                        column: x => x.NameId,
+                        principalTable: "LangStrings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Topics",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NameId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Topics", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Topics_LangStrings_NameId",
+                        column: x => x.NameId,
+                        principalTable: "LangStrings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Translations",
+                columns: table => new
+                {
+                    Culture = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    LangStringId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", maxLength: 10240, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Translations", x => new { x.Culture, x.LangStringId });
+                    table.ForeignKey(
+                        name: "FK_Translations_LangStrings_LangStringId",
+                        column: x => x.LangStringId,
+                        principalTable: "LangStrings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Words",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    Example = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    Explanation = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
-                    Pronunciation = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
-                    LanguageId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Language = table.Column<int>(type: "int", nullable: false),
                     PartOfSpeechId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     TopicId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Example = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    Explanation = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
+                    Pronunciation = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: true),
                     QueryWordId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Words", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Words_Languages_LanguageId",
-                        column: x => x.LanguageId,
-                        principalTable: "Languages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Words_PartsOfSpeech_PartOfSpeechId",
                         column: x => x.PartOfSpeechId,
@@ -271,9 +321,29 @@ namespace DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Words_LanguageId",
-                table: "Words",
-                column: "LanguageId");
+                name: "IX_Languages_NameId",
+                table: "Languages",
+                column: "NameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PartsOfSpeech_AbbreviationId",
+                table: "PartsOfSpeech",
+                column: "AbbreviationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PartsOfSpeech_NameId",
+                table: "PartsOfSpeech",
+                column: "NameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Topics_NameId",
+                table: "Topics",
+                column: "NameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Translations_LangStringId",
+                table: "Translations",
+                column: "LangStringId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Words_PartOfSpeechId",
@@ -309,6 +379,12 @@ namespace DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Languages");
+
+            migrationBuilder.DropTable(
+                name: "Translations");
+
+            migrationBuilder.DropTable(
                 name: "Words");
 
             migrationBuilder.DropTable(
@@ -318,13 +394,13 @@ namespace DAL.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Languages");
-
-            migrationBuilder.DropTable(
                 name: "PartsOfSpeech");
 
             migrationBuilder.DropTable(
                 name: "Topics");
+
+            migrationBuilder.DropTable(
+                name: "LangStrings");
         }
     }
 }

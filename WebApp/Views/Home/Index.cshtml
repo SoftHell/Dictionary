@@ -1,8 +1,46 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model WebApp.ViewModels.SearchViewModel
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="text-center heading-container">
+            <span class="company-logo-heading display-4 main-heading" style="left: 40px;">W</span>
+            <img src="https://i.pinimg.com/originals/a4/48/f0/a448f012ac2681e47ebdd86aaf8a274a.gif" height="30%" width="30%" alt="geometric-shape-gif">
+            <span class="company-logo-heading display-4 main-heading" style="left: 10px;">r</span>
+            <span class="company-logo-heading display-4 main-heading" style="left: 70px;">d</span>
+            <span class="company-logo-heading display-4 main-heading" style="left: 130px;">y</span>
 
-<div class="text-center">
-    <h1 class="display-4">Wordy</h1>
-    <p>@Resources.Views.Home.Index.Estonian_English_Estonian_Dict</p>
+            <h2>@Resources.Views.Home.Index.Estonian_English_Estonian_Dict</h2>
+        </div>
+        <div class="col-md-10 col-sm-10 info-box container d-grid gap-4 mx-auto form-box">
+            <form asp-action="Search">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3 form-group">
+                    <label asp-for="KeyWord" for="insertKeyword" class="form-label">@Resources.Views.Home.Index.InsertKeyword</label>
+                    <input asp-for="KeyWord" type="email" class="form-control" id="insertKeyword">
+                    <span asp-validation-for="KeyWord" class="text-danger"></span>
+                </div>
+                <div class="mb-3 form-check form-check-inline">
+                    <input asp-for="LanguageName" class="form-check-input" type="radio" name="inlineRadioOptions" id="selectEst" value="EST" checked>
+                    <label asp-for="LanguageName" class="form-check-label" for="selectEst">@Resources.Views.Home.Index.EST</label>
+                    <span asp-validation-for="LanguageName" class="text-danger"></span>
+                </div>
+                <div class="mb-3 form-check form-check-inline">
+                    <input asp-for="LanguageName" class="form-check-input" type="radio" name="inlineRadioOptions" id="selectEng" value="ENG">
+                    <label asp-for="LanguageName" class="form-check-label" for="selectEng">@Resources.Views.Home.Index.ENG</label>
+                </div>
+                <div class="mb-3 form-check">
+                    <input asp-for="ExactMatch" class="form-check-input" type="checkbox" value="" id="exactMatch" checked>
+                    <label asp-for="ExactMatch" class="form-check-label" for="exactMatch">
+                        @Resources.Views.Home.Index.ExactMatch
+                    </label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-1"></div>
+                    <input class="btn btn-info col-10" type="submit" value="@Resources.Views.Home.Index.Search"/>
+                    <div class="col-1"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
 </div>

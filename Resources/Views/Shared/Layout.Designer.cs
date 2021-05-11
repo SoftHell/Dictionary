@@ -79,11 +79,38 @@ namespace Resources.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Part of Speech.
+        /// </summary>
+        public static string PartOfSpeech {
+            get {
+                return ResourceManager.GetString("PartOfSpeech", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Privacy.
         /// </summary>
         public static string Privacy {
             get {
                 return ResourceManager.GetString("Privacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Topic.
+        /// </summary>
+        public static string Topic {
+            get {
+                return ResourceManager.GetString("Topic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Words.
+        /// </summary>
+        public static string Word {
+            get {
+                return ResourceManager.GetString("Word", resourceCulture);
             }
         }
     }
