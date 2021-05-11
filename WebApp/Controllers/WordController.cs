@@ -14,7 +14,7 @@ namespace WebApp.Controllers
     public class WordController : Controller
     {
         private readonly AppDbContext _context;
-
+        
         public WordController(AppDbContext context)
         {
             _context = context;
@@ -47,125 +47,151 @@ namespace WebApp.Controllers
         }
 
         // GET: Word/Create
-        public async Task<IActionResult> Create(WordViewModel? viewModel)
+        public async Task<IActionResult> Create()
         {
-            if (viewModel == null)
+            var vm = new WordViewModel()
             {
-                var vm = new WordViewModel()
-                {
-                    TopicSelectList =
-                        new SelectList(await _context.Topics
-                                .Include(t => t.Name)
-                                .ThenInclude(n => n.Translations)
-                                .ToListAsync(),
-                            nameof(Topic.Id), nameof(Topic.Name)),
+                TopicSelectList =
+                    new SelectList(await _context.Topics.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
+                        nameof(Topic.Id), nameof(Topic.Name)),
 
-                    PartOfSpeechSelectList =
-                        new SelectList(await _context.PartsOfSpeech
-                                .Include(t => t.Name)
-                                .ThenInclude(n => n.Translations)
-                                .ToListAsync(),
-                            nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name)),
-                };
-                return View(vm);
-            }
-
-            viewModel.TopicSelectList =
-                new SelectList(await _context.Topics
-                        .Include(t => t.Name)
-                        .ThenInclude(n => n.Translations)
-                        .ToListAsync(),
-                    nameof(Topic.Id), nameof(Topic.Name));
-
-            viewModel.PartOfSpeechSelectList =
-                new SelectList(await _context.PartsOfSpeech
-                        .Include(t => t.Name)
-                        .ThenInclude(n => n.Translations)
-                        .ToListAsync(),
-                    nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name));
+                PartOfSpeechSelectList =
+                    new SelectList(await _context.PartsOfSpeech.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
+                        nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name)),
+                LanguageSelectList =
+                    new SelectList(
+                        await _context.Languages.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
+                        nameof(Language.Id), nameof(Language.Name))
+            };
             
-            return View(viewModel);
-        }
-
-        // GET: Word/AddEquivalent
-        public async Task<IActionResult> AddEquivalent(WordViewModel vm, string equivalent)
-        {
-            vm.Equivalents!.Add(equivalent);
-            
-            vm.TopicSelectList =
-                new SelectList(await _context.Topics
-                        .Include(t => t.Name)
-                        .ThenInclude(n => n.Translations)
-                        .ToListAsync(),
-                    nameof(Topic.Id), nameof(Topic.Name), nameof(vm.Word.TopicId));
-
-            vm.PartOfSpeechSelectList =
-                new SelectList(await _context.PartsOfSpeech
-                        .Include(t => t.Name)
-                        .ThenInclude(n => n.Translations)
-                        .ToListAsync(),
-                    nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name), nameof(vm.Word.PartOfSpeechId));
-
-            return RedirectToAction(nameof(Create), new {viewModel = vm});
+            return View(vm);
             
         }
-       
-
+        
         // POST: Word/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateWord(WordViewModel vm)
+        public async Task<IActionResult> Create(WordViewModel vm)
         {
             if (ModelState.IsValid)
             {
                 
-                /*if (vm.LanguageName == (int) ELanguage.En)
+                if (vm.Word.Value != string.Empty)
                 {
-                    var equivalent = new Word()
-                    {
-                        Value = vm.EstonianValue,
-                        Language = ELanguage.Et,
-                        PartOfSpeechId = vm.Word!.PartOfSpeechId,
-                        TopicId = vm.Word!.TopicId
-                    };
-                    var savedEquivalent = await _context.Words.AddAsync(equivalent);
-                    
-                    var word = vm.Word;
-                    word!.Value = vm.Value;
-                    word.QueryWordId = savedEquivalent.Entity.Id;
+                    var word = _context.Words.Add(vm.Word);
+                    var id = word.Entity.Id;
+                    await _context.SaveChangesAsync();
 
-                }*/
-                
-                _context.Add(vm.Word);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(AddEquivalent), new {wordId = id});
+                }
             }
 
             vm.TopicSelectList =
-                new SelectList(await _context.Topics
-                        .Include(t => t.Name)
-                        .ThenInclude(n => n.Translations)
-                        .ToListAsync(),
+                new SelectList(
+                    await _context.Topics.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
                     nameof(Topic.Id), nameof(Topic.Name));
 
             vm.PartOfSpeechSelectList =
-                new SelectList(await _context.PartsOfSpeech
-                        .Include(t => t.Name)
-                        .ThenInclude(n => n.Translations)
-                        .ToListAsync(),
+                new SelectList(
+                    await _context.PartsOfSpeech.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
                     nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name));
-
             vm.LanguageSelectList =
-                new SelectList(await _context.Languages
-                        .Include(t => t.Name)
-                        .ThenInclude(n => n.Translations)
-                        .ToListAsync(),
+                new SelectList(
+                    await _context.Languages.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
                     nameof(Language.Id), nameof(Language.Name));
             
-            return RedirectToAction(nameof(Create), new {viewModel = vm});
+            return View(vm);
         }
+
+        // GET: Word/AddEquivalent
+        public async Task<IActionResult> AddEquivalent(Guid wordId)
+        {
+            var vm = new WordViewModel
+            {
+                TopicSelectList =
+                    new SelectList(
+                        await _context.Topics.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
+                        nameof(Topic.Id), nameof(Topic.Name)),
+                PartOfSpeechSelectList =
+                    new SelectList(
+                        await _context.PartsOfSpeech.Include(x => x.Name).ThenInclude(n => n.Translations)
+                            .ToListAsync(),
+                        nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name)),
+                Word = {QueryWordId = wordId},
+            };
+
+
+            return View(vm);
+
+        }
+        
+        // POST: Word/AddEquivalent
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddEquivalent(WordViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                if (vm.Word.Value != string.Empty)
+                {
+                    if (vm.Word.QueryWordId != null)
+                    {
+                        var parentWord = await _context.Words.FirstOrDefaultAsync(x => x.Id == vm.Word.QueryWordId);
+                        
+                        vm.Word.Topic = parentWord.Topic;
+                        vm.Word.PartOfSpeech = parentWord.PartOfSpeech;
+                        var lang = await _context.Languages.FirstOrDefaultAsync(x => x.Id == parentWord.LanguageId);
+                        
+                        Console.WriteLine("Parent language:" + lang.Id);
+                        
+                        if (lang.Abbreviation == ELanguage.En)
+                        {
+                            var equivalentLang =
+                                await _context.Languages.FirstOrDefaultAsync(x => x.Abbreviation == ELanguage.Et);
+                            vm.Word.LanguageId = equivalentLang.Id;
+                        }
+                        else
+                        {
+                            var equivalentLang =
+                                await _context.Languages.FirstOrDefaultAsync(x => x.Abbreviation == ELanguage.En);
+                            vm.Word.LanguageId = equivalentLang.Id;
+                        }
+                    }
+                    var word = await _context.Words.AddAsync(vm.Word);
+                    await _context.SaveChangesAsync();
+
+                    if (vm.Word.QueryWordId == null)
+                        
+                        return RedirectToAction(nameof(Details), new {id = vm.Word.QueryWordId});
+                    {
+                        var parentWord = await _context.Words.FirstOrDefaultAsync(x => x.Id == vm.Word.QueryWordId);
+                        if (parentWord.Equivalents != null)
+                        {
+                            parentWord.Equivalents.Add(word.Entity);
+                        }
+                        else
+                        {
+                            parentWord.Equivalents = new List<Word> {word.Entity};
+                        }
+                    }
+                    return RedirectToAction(nameof(Details), new {id = vm.Word.QueryWordId});
+                }
+            }
+
+            vm.TopicSelectList =
+                new SelectList(
+                    await _context.Topics.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
+                    nameof(Topic.Id), nameof(Topic.Name));
+
+            vm.PartOfSpeechSelectList =
+                new SelectList(
+                    await _context.PartsOfSpeech.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
+                    nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name));
+            
+            return View(vm);
+        }
+        
+
 
         // GET: Word/Edit/5
         public async Task<IActionResult> Edit(Guid? id)

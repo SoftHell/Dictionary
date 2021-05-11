@@ -72,4 +72,7 @@
     <data name="Continue" xml:space="preserve">
         <value>Continue</value>
     </data>
+    <data name="AddEquivalent" xml:space="preserve">
+        <value>Add Equivalent</value>
+    </data>
 </root>

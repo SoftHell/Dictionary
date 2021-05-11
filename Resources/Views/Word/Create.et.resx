@@ -65,4 +65,7 @@
     <data name="Continue" xml:space="preserve">
         <value>Edasi</value>
     </data>
+    <data name="AddEquivalent" xml:space="preserve">
+        <value>Lisa vaste</value>
+    </data>
 </root>

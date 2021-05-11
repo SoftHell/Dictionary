@@ -121,8 +121,8 @@ namespace DAL.Migrations
                         .HasMaxLength(1024)
                         .HasColumnType("nvarchar(1024)");
 
-                    b.Property<int>("Language")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LanguageId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("PartOfSpeechId")
                         .HasColumnType("uniqueidentifier");
@@ -143,6 +143,8 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
 
                     b.HasIndex("PartOfSpeechId");
 
@@ -406,6 +408,12 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Domain.Word", b =>
                 {
+                    b.HasOne("Domain.Language", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Domain.PartOfSpeech", "PartOfSpeech")
                         .WithMany()
                         .HasForeignKey("PartOfSpeechId")
@@ -420,6 +428,8 @@ namespace DAL.Migrations
                         .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Language");
 
                     b.Navigation("PartOfSpeech");
 

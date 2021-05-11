@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210511115724_Initial")]
+    [Migration("20210511221747_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,8 +123,8 @@ namespace DAL.Migrations
                         .HasMaxLength(1024)
                         .HasColumnType("nvarchar(1024)");
 
-                    b.Property<int>("Language")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LanguageId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("PartOfSpeechId")
                         .HasColumnType("uniqueidentifier");
@@ -145,6 +145,8 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
 
                     b.HasIndex("PartOfSpeechId");
 
@@ -408,6 +410,12 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Domain.Word", b =>
                 {
+                    b.HasOne("Domain.Language", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Domain.PartOfSpeech", "PartOfSpeech")
                         .WithMany()
                         .HasForeignKey("PartOfSpeechId")
@@ -422,6 +430,8 @@ namespace DAL.Migrations
                         .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Language");
 
                     b.Navigation("PartOfSpeech");
 

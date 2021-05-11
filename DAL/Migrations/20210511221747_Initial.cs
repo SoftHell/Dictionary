@@ -250,7 +250,7 @@ namespace DAL.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    Language = table.Column<int>(type: "int", nullable: false),
+                    LanguageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PartOfSpeechId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     TopicId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Example = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
@@ -261,6 +261,12 @@ namespace DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Words", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Words_Languages_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "Languages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Words_PartsOfSpeech_PartOfSpeechId",
                         column: x => x.PartOfSpeechId,
@@ -346,6 +352,11 @@ namespace DAL.Migrations
                 column: "LangStringId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Words_LanguageId",
+                table: "Words",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Words_PartOfSpeechId",
                 table: "Words",
                 column: "PartOfSpeechId");
@@ -379,9 +390,6 @@ namespace DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Languages");
-
-            migrationBuilder.DropTable(
                 name: "Translations");
 
             migrationBuilder.DropTable(
@@ -392,6 +400,9 @@ namespace DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Languages");
 
             migrationBuilder.DropTable(
                 name: "PartsOfSpeech");

@@ -1,3 +1,4 @@
+@using Domain
 @model WebApp.ViewModels.WordViewModel
 
 <h1>@Resources.CRUDCommon.CreateNew</h1>
@@ -6,57 +7,26 @@
 <hr />
 <div class="row">
     <div class="col-md-8">
-        <form asp-action="AddEquivalent">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="mb-3 form-check form-check-inline">
-                <input asp-for="Word!.Language" class="form-check-input" type="radio" name="inlineRadioOptions" id="selectEst" value="1" checked>
-                <label asp-for="Word!.Language" class="form-check-label" for="selectEst">@Resources.Views.Home.Index.EST</label>
-                <span asp-validation-for="Word!.Language" class="text-danger"></span>
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="input-group mb-3">
+                <select type="text" class="form-control" placeholder="@Resources.Views.Word.Create.PartOfSpeech" asp-for="Word!.LanguageId" asp-items="Model.LanguageSelectList">
+                    @*<option value="">@Resources.CRUDCommon.SelectItem</option>*@
+                </select>
+                
             </div>
-            <div class="mb-3 form-check form-check-inline">
-                <input asp-for="Word!.Language" class="form-check-input" type="radio" name="inlineRadioOptions" id="selectEng" value="0">
-                <label asp-for="Word!.Language" class="form-check-label" for="selectEng">@Resources.Views.Home.Index.ENG</label>
-            </div>
-            
-            
             <div class="form-group">
                 <label asp-for="Word!.Value" class="control-label"></label>
                 <input asp-for="Word!.Value" class="form-control" placeholder="@Resources.Views.Word.Create.InsertNewWord"/>
                 <span asp-validation-for="Value" class="text-danger"></span>
             </div>
-            
-            @*<form asp-action="AddEquivalent">
-                @if (Model.Equivalents!.Count < 1)
-                {
-                    <div class="input-group mb-3">
-                        <input asp-for="Equivalent" type="text" class="form-control" placeholder="@Resources.Views.Word.Create.InsertEquivalent" aria-label="@Resources.Views.Word.Create.InsertEquivalent" aria-describedby="button-addon2">
-                        <span asp-validation-for="Value" class="text-danger"></span>
-                        <input type="submit" asp-route-vm="@Model" asp-route-equivalent="@Model.Equivalent" class="btn btn-outline-secondary" id="button-addon2" value="@Resources.Views.Word.Create.Add"/>
-                    </div>
-                }
-                else
-                {
-                    <div class="input-group mb-3">
-                        <label asp-for="Equivalents" class="control-label"></label>
-                        <input asp-for="Equivalent" class="form-control" placeholder="@Resources.Views.Word.Create.InsertEquivalent"/>
-                        <input class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" value="@Resources.Views.Word.Create.Equivalents"/>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            @foreach (var equivalent in Model.Equivalents!)
-                            {
-                                <li>@equivalent</li>
-                            }
-                        </ul>
-                    </div>
-                }
-            </form>*@
-            
             <div class="input-group mb-3">
                 <span class="input-group-text">@Resources.Views.Word.Create.PartOfSpeech</span>
-                <select type="text" class="form-control" placeholder="@Resources.Views.Word.Create.PartOfSpeech" aria-label="PartOfSpeech" asp-for="Word!.PartOfSpeechId" asp-items="Model.PartOfSpeechSelectList">
+                <select type="text" class="form-control" placeholder="@Resources.Views.Word.Create.PartOfSpeech" asp-for="Word!.PartOfSpeechId" asp-items="Model.PartOfSpeechSelectList">
                     <option value="">@Resources.CRUDCommon.SelectItem</option>
                 </select>
                 <span class="input-group-text">@Resources.Views.Word.Create.Topic</span>
-                <select type="text" class="form-control" placeholder="@Resources.Views.Word.Create.Topic" aria-label="Topic" asp-for="Word!.TopicId" asp-items="Model.TopicSelectList">
+                <select type="text" class="form-control" placeholder="@Resources.Views.Word.Create.Topic" asp-for="Word!.TopicId" asp-items="Model.TopicSelectList">
                     <option value="">@Resources.CRUDCommon.SelectItem</option>
                 </select>
             </div>

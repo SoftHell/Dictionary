@@ -70,6 +70,15 @@ namespace Resources.Views.Word {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Equivalent.
+        /// </summary>
+        public static string AddEquivalent {
+            get {
+                return ResourceManager.GetString("AddEquivalent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a Word.
         /// </summary>
         public static string AddWord {

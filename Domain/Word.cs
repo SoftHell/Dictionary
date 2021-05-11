@@ -12,10 +12,10 @@ namespace Domain
         [MinLength(2, ErrorMessageResourceName = "ErrorMessage_MinLength", ErrorMessageResourceType = typeof(Resources.Common))]
         [MaxLength(64, ErrorMessageResourceName = "ErrorMessage_MaxLength", ErrorMessageResourceType = typeof(Resources.Common))]
         public string Value { get; set; } = default!;
-        
-        
+
+        public Guid LanguageId { get; set; }
         [Display(ResourceType = typeof(Resources.Views.Word.Create), Name = nameof(Language))]
-        public ELanguage Language { get; set; } = default!;
+        public Language? Language { get; set; } = default!;
         
         public Guid? PartOfSpeechId { get; set; }
         [Display(ResourceType = typeof(Resources.Views.Word.Create), Name = nameof(PartOfSpeech))]
