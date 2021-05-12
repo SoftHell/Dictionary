@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-md-8">
         <form asp-action="Create">
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="input-group mb-3">
                 <select type="text" class="form-control" placeholder="@Resources.Views.Word.Create.PartOfSpeech" asp-for="Word!.LanguageId" asp-items="Model.LanguageSelectList">
                     @*<option value="">@Resources.CRUDCommon.SelectItem</option>*@

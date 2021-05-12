@@ -171,7 +171,7 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   font-style: normal;
   color: #343a40;
   justify-content: center;
-  font-size: xx-large;
+  font-size: large;
 }
 
 .main-heading {
@@ -195,6 +195,10 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   
 }
 
+.pronunciation-text {
+  color: #4e555b;
+  font-style: italic;
+}
 
 
 /*====================== ICON BUTTONS =======================*/
@@ -219,6 +223,7 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
 .icon-right {
   float: right;
 }
+
 
 /*==========================================================*/
 /*============== SIZE RESPONSIVE ELEMENTS ==================*/

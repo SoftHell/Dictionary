@@ -37,6 +37,16 @@ namespace WebApp.Controllers
 
             var word = await _context.Words
                 .Include(w => w.QueryWord)
+                .Include(x => x.Equivalents)
+                .Include(w => w.PartOfSpeech)
+                .ThenInclude(x => x!.Name)
+                .ThenInclude(n => n.Translations)
+                .Include(w => w.Topic)
+                .ThenInclude(x => x!.Name)
+                .ThenInclude(n => n.Translations)
+                .Include(w => w.Language)
+                .ThenInclude(x => x!.Name)
+                .ThenInclude(n => n.Translations)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (word == null)
             {
@@ -138,11 +148,10 @@ namespace WebApp.Controllers
                     {
                         var parentWord = await _context.Words.FirstOrDefaultAsync(x => x.Id == vm.Word.QueryWordId);
                         
-                        vm.Word.Topic = parentWord.Topic;
-                        vm.Word.PartOfSpeech = parentWord.PartOfSpeech;
+                        vm.Word.TopicId = parentWord.TopicId;
+                        vm.Word.PartOfSpeechId = parentWord.PartOfSpeechId;
+                        vm.Word.Equivalents = new List<Word> {parentWord};
                         var lang = await _context.Languages.FirstOrDefaultAsync(x => x.Id == parentWord.LanguageId);
-                        
-                        Console.WriteLine("Parent language:" + lang.Id);
                         
                         if (lang.Abbreviation == ELanguage.En)
                         {
@@ -280,5 +289,7 @@ namespace WebApp.Controllers
         {
             return _context.Words.Any(e => e.Id == id);
         }
+
+        
     }
 }

@@ -38,4 +38,7 @@
     <data name="BackToList" xml:space="preserve">
         <value>Tagasi</value>
     </data>
+    <data name="Index" xml:space="preserve">
+        <value>Sõnastik</value>
+    </data>
 </root>

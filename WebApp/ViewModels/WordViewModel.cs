@@ -13,6 +13,8 @@ namespace WebApp.ViewModels
 
         public Word Word { get; set; } = new();
         
+        public Guid? QueryWordId { get; set; }
+
         [Display(ResourceType = typeof(Resources.Views.Word.Create), Name = "InsertNewWord")]
         [MinLength(1, ErrorMessageResourceName = "ErrorMessage_MinLength", ErrorMessageResourceType = typeof(Resources.Common))]
         [MaxLength(64, ErrorMessageResourceName = "ErrorMessage_MaxLength", ErrorMessageResourceType = typeof(Resources.Common))]

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebApp.Models;
 using WebApp.ViewModels;
@@ -15,10 +17,13 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _context;
+        
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, AppDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -33,19 +38,25 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Search(SearchViewModel vm)
+        public async Task<IActionResult> Search(string? keyWord)
         {
-
-            if (ModelState.IsValid)
+            if (keyWord == null || keyWord.Trim().Equals(string.Empty))
             {
-                
+                var appDbContext = await _context.Words
+                    .Include(w => w.QueryWord)
+                    .ToListAsync();
+                return View(appDbContext);
             }
-
-            return Ok();
+            else
+            {
+                var appDbContext = await _context.Words
+                    .Include(w => w.QueryWord)
+                    .Where(x => x.Value.Contains(keyWord!))
+                    .ToListAsync();
+                return View(appDbContext);
+            }
         }
         
-        
-
         public IActionResult Privacy()
         {
             return View();
