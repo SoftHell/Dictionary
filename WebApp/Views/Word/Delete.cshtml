@@ -1,51 +1,63 @@
-@model Domain.Word
+@model WebApp.ViewModels.WordDeleteViewModel
+<div class="row">
+    <a class="col-sm-1" asp-action="Index">
+        <img src="/css/img/arrow-left.svg" alt="back-icon" class="icon icon-lg">
+    </a>
 
-@{
-    ViewData["Title"] = "Delete";
-}
+    <h1 class="col-sm-10 detail-heading highlighted-heading">@Html.DisplayFor(model => model.Word.Value)</h1>
 
-<h1>Delete</h1>
+</div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Word</h4>
-    <hr />
+<hr/>
+
+<h4 class="container info-box box-shadow alert-danger">
+    @Resources.CRUDCommon.AreYouSureYouWantToDelete
+    @Resources.Views.DTONames.TheWordPhrase
+    @Model.Word.Value?
+</h4>
+<div class="form-box">
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Value)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Word.Value)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Value)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Word.Value)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Example)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Word.Example)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Example)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Word.Example)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Explanation)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Word.Explanation)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Explanation)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Word.Explanation)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pronunciation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pronunciation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.QueryWord)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.QueryWord!.Value)
-        </dd>
+
+        @if (Model.Word.Equivalents != null)
+        {
+            <dt class="col-sm-2" for="equivalent-list">@Resources.Views.Word.Create.Equivalents</dt>
+            <dd class="col-sm-10"></dd>
+            @foreach (var equivalent in Model.Word.Equivalents)
+            {
+                <dt class="col-sm-2"></dt>
+                <dd class="col-sm-10">
+                    @equivalent.Value
+                </dd>
+            }
+        }
     </dl>
-    
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="hidden" asp-for="Word.Id"/>
+        <div class="form-check padded-lg">
+            <input class="form-check-input" type="checkbox" asp-for="KeepEquivalents" id="keepEquivalents" checked>
+            <label class="form-check-label" for="keepEquivalents">
+                @Resources.Views.Word.Delete.KeepEquivalents
+            </label>
+        </div>
+        <input class="btn btn-danger" type="submit" value="@Resources.CRUDCommon.Delete">
     </form>
+
 </div>

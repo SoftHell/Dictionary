@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources.Views {
+namespace Resources.Views.Word {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Resources.Views {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class DTONames {
+    public class Delete {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DTONames() {
+        internal Delete() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Resources.Views {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Resources.Views.DTONames", typeof(DTONames).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Resources.Views.Word.Delete", typeof(Delete).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,56 @@ namespace Resources.Views {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Language.
+        ///   Looks up a localized string similar to Delete With Equivalents.
         /// </summary>
-        public static string Language {
+        public static string DeleteWithEquivalents {
             get {
-                return ResourceManager.GetString("Language", resourceCulture);
+                return ResourceManager.GetString("DeleteWithEquivalents", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to the phrase.
+        ///   Looks up a localized string similar to Delete But Keep Equivalents.
         /// </summary>
-        public static string TheWordPhrase {
+        public static string DeleteWithoutEquivalents {
             get {
-                return ResourceManager.GetString("TheWordPhrase", resourceCulture);
+                return ResourceManager.GetString("DeleteWithoutEquivalents", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Word/Phrase.
+        ///   Looks up a localized string similar to Delete Word.
         /// </summary>
-        public static string Word {
+        public static string DeleteWord {
             get {
-                return ResourceManager.GetString("Word", resourceCulture);
+                return ResourceManager.GetString("DeleteWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to also discard the equivalents?.
+        /// </summary>
+        public static string DiscardEquivalents {
+            get {
+                return ResourceManager.GetString("DiscardEquivalents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep Equivalents.
+        /// </summary>
+        public static string KeepEquivalents {
+            get {
+                return ResourceManager.GetString("KeepEquivalents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to keep the equivalents?.
+        /// </summary>
+        public static string WantToKeepEquivalents {
+            get {
+                return ResourceManager.GetString("WantToKeepEquivalents", resourceCulture);
             }
         }
     }

@@ -17,4 +17,7 @@
     <data name="Language" xml:space="preserve">
         <value>Keel</value>
     </data>
+    <data name="TheWordPhrase" xml:space="preserve">
+        <value>fraasi</value>
+    </data>
 </root>

@@ -97,13 +97,13 @@ namespace WebApp.Controllers
                 {
                     var word = _context.Words.Add(vm.Word);
                     await _context.SaveChangesAsync();
+
+                    if (vm.Equivalent == string.Empty)
+                        return RedirectToAction(nameof(Details), new {id = word.Entity.Id});
                     
-                    if (vm.Equivalent != string.Empty)
-                    {
-                        var equivalent = await CreateEquivalent(word.Entity, vm.Equivalent!);
-                        word.Entity.Equivalents = new List<Word> {equivalent};
-                        await _context.SaveChangesAsync();
-                    }
+                    var equivalent = await CreateEquivalent(word.Entity, vm.Equivalent!);
+                    word.Entity.Equivalents = new List<Word> {equivalent};
+                    await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Details), new {id = word.Entity.Id});
                 }
             }
@@ -134,7 +134,16 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            var word = await _context.Words.FindAsync(id);
+            var word = await _context.Words
+                .Include(w => w.QueryWord)
+                .Include(x => x.Equivalents)
+                .Include(w => w.PartOfSpeech)
+                .ThenInclude(x => x!.Name)
+                .ThenInclude(n => n.Translations)
+                .Include(w => w.Topic)
+                .ThenInclude(x => x!.Name)
+                .ThenInclude(n => n.Translations)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (word == null)
             {
                 return NotFound();
@@ -143,18 +152,19 @@ namespace WebApp.Controllers
             var vm = new WordViewModel()
             {
                 Word = word,
+                Value = word.Value,
 
                 TopicSelectList =
                     new SelectList(
                         await _context.Topics.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
-                        nameof(Topic.Id), nameof(Topic.Name)),
+                        nameof(Topic.Id), nameof(Topic.Name), nameof(word.TopicId)),
                 PartOfSpeechSelectList =
                     new SelectList(
                         await _context.PartsOfSpeech.Include(x => x.Name).ThenInclude(n => n.Translations)
                             .ToListAsync(),
-                        nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name))
+                        nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name), nameof(word.PartOfSpeechId))
             };
-            return View(word);
+            return View(vm);
         }
 
         // POST: Word/Edit/5
@@ -162,10 +172,9 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Value,Example,Explanation,Pronunciation,QueryWordId")]
-            Word word)
+        public async Task<IActionResult> Edit(Guid id, WordViewModel vm)
         {
-            if (id != word.Id)
+            if (id != vm.Word.Id)
             {
                 return NotFound();
             }
@@ -174,26 +183,29 @@ namespace WebApp.Controllers
             {
                 try
                 {
-                    _context.Update(word);
+                    _context.Update(vm.Word);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!WordExists(word.Id))
+                    if (!WordExists(vm.Word.Id))
                     {
                         return NotFound();
                     }
-                    else
-                    {
-                        throw;
-                    }
                 }
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new {id = vm.Word.Id});
             }
+            vm.TopicSelectList =
+                new SelectList(
+                    await _context.Topics.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
+                    nameof(Topic.Id), nameof(Topic.Name), nameof(vm.Word.TopicId));
 
-            ViewData["QueryWordId"] = new SelectList(_context.Words, "Id", "Value", word.QueryWordId);
-            return View(word);
+            vm.PartOfSpeechSelectList =
+                new SelectList(
+                    await _context.PartsOfSpeech.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
+                    nameof(PartOfSpeech.Id), nameof(PartOfSpeech.Name), nameof(vm.Word.PartOfSpeechId));
+
+            return View(vm);
         }
 
         // GET: Word/Delete/5
@@ -213,21 +225,69 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            return View(word);
+            var vm = new WordDeleteViewModel()
+            {
+                Word = word,
+
+            };
+
+            return View(vm);
         }
 
         // POST: Word/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> Delete(WordDeleteViewModel vm)
         {
-            var word = await _context.Words.FindAsync(id);
-            
+            var word = await _context.Words.FirstOrDefaultAsync(x => x.Id == vm.Word.Id);
+            var equivalents = await _context.Words.Where(x => x.QueryWordId == vm.Word.Id).ToListAsync();
+            if (equivalents != null && equivalents.Count > 0)
+            {
+                if (vm.KeepEquivalents)
+                {
+                    foreach (var equivalent in equivalents)
+                    {
+                        equivalent.QueryWordId = null;
+                        equivalent.QueryWord = null;
+                    }
+                }
+                else
+                {
+                    foreach (var equivalent in equivalents)
+                    {
+                        _context.Words.Remove(equivalent);
+                    }
+                }
+                
+                await _context.SaveChangesAsync();
+            }
             _context.Words.Remove(word);
             await _context.SaveChangesAsync();
             
             return word.QueryWordId != null ? RedirectToAction(nameof(Details), new {id = word.QueryWordId}) : RedirectToAction(nameof(Index));
         }
+        
+        /*// POST: Word/Delete/5
+        [HttpPost, ActionName("DeleteWithEquivalents")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteWithEquivalents(Guid id)
+        {
+            var word = await _context.Words.FirstOrDefaultAsync(x => x.Id == id);
+            var equivalents = await _context.Words.Where(x => x.QueryWordId == id).ToListAsync();
+            if (equivalents != null && equivalents.Count > 0)
+            {
+                foreach (var equivalent in equivalents)
+                {
+                    _context.Words.Remove(equivalent);
+                }
+                await _context.SaveChangesAsync();
+            }
+            _context.Words.Remove(word);
+            await _context.SaveChangesAsync();
+            
+            return word.QueryWordId != null ? RedirectToAction(nameof(Details), new {id = word.QueryWordId}) : RedirectToAction(nameof(Index));
+        }
+        */
 
         
         private bool WordExists(Guid id)
@@ -237,7 +297,7 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> AddEquivalent(WordViewModel vm)
         {
-            if (vm.Equivalent == string.Empty || vm.Word.Id == default)
+            if (vm.Equivalent == null || vm.Word.Id == default)
                 return RedirectToAction(nameof(Details), new {id = vm.Word.Id});
             
             var parentWord = await _context.Words.FirstOrDefaultAsync(x => x.Id == vm.Word.Id);

@@ -18,13 +18,22 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Word" xml:space="preserve">
-        <value>Word/Phrase</value>
+    <data name="DeleteWithEquivalents" xml:space="preserve">
+        <value>Delete With Equivalents</value>
     </data>
-    <data name="Language" xml:space="preserve">
-        <value>Language</value>
+    <data name="DeleteWithoutEquivalents" xml:space="preserve">
+        <value>Delete But Keep Equivalents</value>
     </data>
-    <data name="TheWordPhrase" xml:space="preserve">
-        <value>the phrase</value>
+    <data name="KeepEquivalents" xml:space="preserve">
+        <value>Keep Equivalents</value>
+    </data>
+    <data name="DiscardEquivalents" xml:space="preserve">
+        <value>Do you want to also discard the equivalents?</value>
+    </data>
+    <data name="WantToKeepEquivalents" xml:space="preserve">
+        <value>Do you want to keep the equivalents?</value>
+    </data>
+    <data name="DeleteWord" xml:space="preserve">
+        <value>Delete Word</value>
     </data>
 </root>

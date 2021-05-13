@@ -34,42 +34,46 @@
         <img src="/css/img/plus.svg" alt="add-icon" class="icon icon-lg">
     </a>
 </p>
+<div class="form-box">
+    <table class="table">
+        <thead>
+        <tr class="row">
+            <th class="col-sm-4">
+                @Resources.Views.Word.Create.WordPhrase
+            </th>
+            <th class="col-sm-6">
+                @Resources.Views.Word.Create.Equivalents
+            </th>
+            <th class="col-sm-2"></th>
+        </tr>
+        </thead>
 
-<table class="table">
-    <thead>
-    <tr class="row">
-        <th class="col-sm-4">
-            @Resources.Views.Word.Create.WordPhrase
-        </th>
-        <th class="col-sm-6">
-            @Resources.Views.Word.Create.Equivalents
-        </th>
-        <th class="col-sm-2"></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-        if (item.Equivalents != null)
+        <tbody>
+
+
+        @foreach (var item in Model)
         {
-            <tr class="row">
-                <td class="col-sm-4">
-                    <div>
-                        <a asp-action="Details" asp-route-id="@item.Id">
-                            @Html.DisplayFor(modelItem => item.Value)
+            if (item.Equivalents != null)
+            {
+                <tr class="row">
+                    <td class="col-sm-4">
+                        <div>
+                            <a asp-action="Details" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.Value)
+                            </a>
+                        </div>
+                    </td>
+                    <td class="col-sm-6">
+                        @DisplayEquivalents(item)
+                    </td>
+                    <td class="col-sm-2">
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <img src="/css/img/trash.svg" alt="add-icon" class="icon icon-right">
                         </a>
-                    </div>
-                </td>
-                <td class="col-sm-6">
-                    @DisplayEquivalents(item)
-                </td>
-                <td class="col-sm-2">
-                    <a asp-action="Delete" asp-route-id="@item.Id">
-                        <img src="/css/img/trash.svg" alt="add-icon" class="icon icon-right">
-                    </a>
-                </td>
-            </tr>
+                    </td>
+                </tr>
+            }
         }
-    }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>

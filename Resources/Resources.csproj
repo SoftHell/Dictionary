@@ -45,6 +45,10 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>SelectLanguage.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Views\Word\Delete.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Delete.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -97,6 +101,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>SelectLanguage.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Views\Word\Delete.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Delete.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

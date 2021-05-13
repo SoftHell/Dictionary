@@ -1,53 +1,53 @@
-@model Domain.Word
+@using Resources.Views.Word
+@model WebApp.ViewModels.WordViewModel
 
-<h1>Edit</h1>
+<h1>@Resources.CRUDCommon.Edit</h1>
 
-<h4>Word</h4>
+<h3 class="highlighted-heading">@Model.Value</h3>
 <hr/>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8 form-box">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id"/>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.Word.Id"/>
+            <input type="hidden" asp-for="@Model.Word.LanguageId"/>
+            <input type="hidden" asp-for="@Model.Word.QueryWordId"/>
+            <input type="hidden" asp-for="@Model.Word.Equivalents"/>
+            
             <div class="form-group">
-                <label asp-for="Value" class="control-label"></label>
-                <input asp-for="Value" class="form-control"/>
+                <label asp-for="Word!.Value" class="control-label"></label>
+                <input asp-for="Word!.Value" class="form-control" value="@Model.Word.Value"/>
                 <span asp-validation-for="Value" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Example" class="control-label"></label>
-                <input asp-for="Example" class="form-control"/>
-                <span asp-validation-for="Example" class="text-danger"></span>
+            <div class="input-group mb-3" id="context-explain">
+                <select type="text" class="form-control" placeholder="@Create.PartOfSpeech" asp-for="Word!.PartOfSpeechId" asp-items="Model.PartOfSpeechSelectList">
+                    <option value="">--- @Resources.CRUDCommon.Select @Create.PartOfSpeech.ToLower() ---</option>
+                </select>
+                <select type="text" class="form-control" placeholder="@Create.Topic" asp-for="Word!.TopicId" asp-items="Model.TopicSelectList">
+                    <option value="">--- @Resources.CRUDCommon.Select @Create.Topic.ToLower() ---</option>
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="Explanation" class="control-label"></label>
-                <input asp-for="Explanation" class="form-control"/>
-                <span asp-validation-for="Explanation" class="text-danger"></span>
+                <label asp-for="Word!.Example" class="control-label"></label>
+                <textarea asp-for="Word!.Example" class="form-control">@Model.Word.Example</textarea>
+                <span asp-validation-for="Word!.Example" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Pronunciation" class="control-label"></label>
-                <input asp-for="Pronunciation" class="form-control"/>
-                <span asp-validation-for="Pronunciation" class="text-danger"></span>
+                <label asp-for="Word!.Explanation" class="control-label"></label>
+                <textarea asp-for="Word!.Explanation" class="form-control">@Model.Word.Explanation</textarea>
+                <span asp-validation-for="Word!.Explanation" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Equivalents" class="control-label"></label>
-                @if (Model.Equivalents != null)
-                {
-                    @foreach (var item in Model.Equivalents!)
-                    {
-                        <div>@item.Value</div>
-                    }
-                }
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary"/>
+            <div class="form-group padded row">
+                <div class="col-sm-3">
+                    <a class="btn btn-outline-info" asp-action="Index">@Resources.CRUDCommon.Back</a>
+                </div>
+                <div class="col-sm-6"></div>
+                <div class="col-sm-3">
+                    <input class="btn btn-info" type="submit" value="@Resources.CRUDCommon.Submit"/>
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

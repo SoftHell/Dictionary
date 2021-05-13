@@ -200,6 +200,18 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   font-style: italic;
 }
 
+.font-size-lg {
+  font-size: large;
+}
+
+.highlighted-heading {
+  color: #117a8b;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
 
 /*====================== ICON BUTTONS =======================*/
 

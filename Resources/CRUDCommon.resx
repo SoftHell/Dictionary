@@ -48,4 +48,10 @@
     <data name="Select" xml:space="preserve">
         <value>Select</value>
     </data>
+    <data name="Edit" xml:space="preserve">
+        <value>Edit</value>
+    </data>
+    <data name="AreYouSureYouWantToDelete" xml:space="preserve">
+        <value>Are you sure you want to delete</value>
+    </data>
 </root>

@@ -41,4 +41,10 @@
     <data name="Select" xml:space="preserve">
         <value>Vali</value>
     </data>
+    <data name="Edit" xml:space="preserve">
+        <value>Muuda</value>
+    </data>
+    <data name="AreYouSureYouWantToDelete" xml:space="preserve">
+        <value>Kas oled kindel, et soovid kustutada</value>
+    </data>
 </root>

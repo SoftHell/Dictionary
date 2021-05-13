@@ -1,0 +1,32 @@
+﻿<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="DeleteWithEquivalents" xml:space="preserve">
+        <value>Kustuta koos vastetega</value>
+    </data>
+    <data name="DeleteWithoutEquivalents" xml:space="preserve">
+        <value>Kustuta, jäta vasted alles</value>
+    </data>
+    <data name="KeepEquivalents" xml:space="preserve">
+        <value>Jäta vasted alles</value>
+    </data>
+    <data name="DiscardEquivalents" xml:space="preserve">
+        <value>Kas soovid vasted kustutada?</value>
+    </data>
+    <data name="WantToKeepEquivalents" xml:space="preserve">
+        <value>Kas soovid vasted alles jätta?</value>
+    </data>
+    <data name="DeleteWord" xml:space="preserve">
+        <value>Kustuta sõna</value>
+    </data>
+</root>

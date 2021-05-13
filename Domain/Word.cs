@@ -8,7 +8,7 @@ namespace Domain
     {
         public Guid Id { get; set; }
         
-        [Display(ResourceType = typeof(Resources.Views.Word.Create), Name = nameof(Value))]
+        [Display(ResourceType = typeof(Resources.Views.Word.Create), Name = "WordPhrase")]
         [MinLength(2, ErrorMessageResourceName = "ErrorMessage_MinLength", ErrorMessageResourceType = typeof(Resources.Common))]
         [MaxLength(64, ErrorMessageResourceName = "ErrorMessage_MaxLength", ErrorMessageResourceType = typeof(Resources.Common))]
         public string Value { get; set; } = default!;
