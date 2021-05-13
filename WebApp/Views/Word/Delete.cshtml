@@ -1,3 +1,4 @@
+@using BLL
 @model WebApp.ViewModels.WordDeleteViewModel
 <div class="row">
     <a class="col-sm-1" asp-action="Index">
@@ -23,32 +24,34 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Word.Value)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Word.Example)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Word.Example)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Word.Explanation)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Word.Explanation)
-        </dd>
+        @if (Model.Word.Explanation != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Word.Explanation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Word.Explanation)
+            </dd>
+        }
+        @if (Model.Word.Example != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Word.Example)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Word.Example)
+            </dd>
+        }
 
         @if (Model.Word.Equivalents != null)
         {
             <dt class="col-sm-2" for="equivalent-list">@Resources.Views.Word.Create.Equivalents</dt>
-            <dd class="col-sm-10"></dd>
-            @foreach (var equivalent in Model.Word.Equivalents)
-            {
-                <dt class="col-sm-2"></dt>
-                <dd class="col-sm-10">
-                    @equivalent.Value
-                </dd>
-            }
+            <dd class="col-sm-10">@LogicHelp.DisplayEquivalents(Model.Word)</dd>
         }
     </dl>
+
+    <hr/>
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="Word.Id"/>
         <div class="form-check padded-lg">

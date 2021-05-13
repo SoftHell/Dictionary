@@ -49,6 +49,7 @@
       <_ContentIncludedByDefault Remove="Views\Word\Details.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Word\Edit.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Word\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Search\Results.cshtml" />
     </ItemGroup>
 
 </Project>

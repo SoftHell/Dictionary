@@ -266,30 +266,7 @@ namespace WebApp.Controllers
             
             return word.QueryWordId != null ? RedirectToAction(nameof(Details), new {id = word.QueryWordId}) : RedirectToAction(nameof(Index));
         }
-        
-        /*// POST: Word/Delete/5
-        [HttpPost, ActionName("DeleteWithEquivalents")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteWithEquivalents(Guid id)
-        {
-            var word = await _context.Words.FirstOrDefaultAsync(x => x.Id == id);
-            var equivalents = await _context.Words.Where(x => x.QueryWordId == id).ToListAsync();
-            if (equivalents != null && equivalents.Count > 0)
-            {
-                foreach (var equivalent in equivalents)
-                {
-                    _context.Words.Remove(equivalent);
-                }
-                await _context.SaveChangesAsync();
-            }
-            _context.Words.Remove(word);
-            await _context.SaveChangesAsync();
-            
-            return word.QueryWordId != null ? RedirectToAction(nameof(Details), new {id = word.QueryWordId}) : RedirectToAction(nameof(Index));
-        }
-        */
 
-        
         private bool WordExists(Guid id)
         {
             return _context.Words.Any(e => e.Id == id);

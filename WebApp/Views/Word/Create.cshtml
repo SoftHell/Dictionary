@@ -1,30 +1,24 @@
 @using Resources.Views.Word
 @model WebApp.ViewModels.WordViewModel
 
-
 <h1>@Create.CreateWord</h1>
-
 <hr/>
-
 <div class="row">
     <div class="col-md-8">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group d-grid gap-2 col-3 mx-auto btn-group" role="group" aria-label="Language selection">
+            <div class="form-group d-grid gap-2 col-4 mx-auto btn-group" role="group" aria-label="Language selection">
                 <select type="text" class="form-control btn-success btn" asp-for="Word!.LanguageId" asp-items="Model.LanguageSelectList"></select>
             </div>
             <div class="form-box">
                 <div class="form-group input-group-lg">
-                    <span class="input-group-text"></span>
                     <input asp-for="Word!.Value" class="form-control" placeholder="@Create.InsertNewWord"/>
                     <span asp-validation-for="Value" class="text-danger"></span>
                 </div>
                 <div class="form-group input-group-lg">
-                    <span class="input-group-text"></span>
                     <input asp-for="Equivalent" class="form-control" placeholder="@Create.InsertEquivalent"/>
                     <span asp-validation-for="Equivalent" class="text-danger"></span>
                 </div>
-
                 <div class="input-group mb-3" id="context-explain">
                     <select type="text" class="form-control" placeholder="@Create.PartOfSpeech" asp-for="Word!.PartOfSpeechId" asp-items="Model.PartOfSpeechSelectList">
                         <option value="">--- @Resources.CRUDCommon.Select @Create.PartOfSpeech.ToLower() ---</option>

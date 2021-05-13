@@ -1,34 +1,7 @@
-@using Domain
+@using BLL
 @model IEnumerable<Domain.Word>
 
-@functions
-{
-    private static string DisplayEquivalents(Word word)
-    {
-        if (word.Equivalents == null)
-        {
-            return string.Empty;
-        }
-        var equivalents = "";
-
-        foreach (var eq in word.Equivalents)
-        {
-            if (!equivalents.Equals(""))
-            {
-                equivalents += ", " + eq.Value;
-            }
-            else
-            {
-                equivalents += eq.Value;
-            }
-        }
-        return equivalents;
-    }
-}
-
-
 <h1>@Resources.CRUDCommon.Index</h1>
-
 <p>
     <a asp-action="Create">
         <img src="/css/img/plus.svg" alt="add-icon" class="icon icon-lg">
@@ -47,10 +20,7 @@
             <th class="col-sm-2"></th>
         </tr>
         </thead>
-
         <tbody>
-
-
         @foreach (var item in Model)
         {
             if (item.Equivalents != null)
@@ -64,7 +34,7 @@
                         </div>
                     </td>
                     <td class="col-sm-6">
-                        @DisplayEquivalents(item)
+                        @LogicHelp.DisplayEquivalents(item)
                     </td>
                     <td class="col-sm-2">
                         <a asp-action="Delete" asp-route-id="@item.Id">

@@ -212,6 +212,33 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   font-weight: bold;
 }
 
+.search-bar {
+  background-color: #17a2b8;
+  padding: 10px;
+  border-radius: 10rem;
+  box-shadow: 5px 5px 10px #9b9b9b;
+}
+
+.search-button {
+  all: unset;
+  border-bottom-right-radius: 20rem;
+  border-top-right-radius: 20rem;
+  padding: 20px;
+  background-color: #ff5f13;
+  box-shadow: none;
+}
+.search-input {
+  all: unset;
+  padding: 10px;
+  background-color: white;
+  border-radius: 20rem;
+}
+
+.home-subheading {
+  text-shadow: 1px 1px 5px #838383;
+}
+
+
 
 /*====================== ICON BUTTONS =======================*/
 

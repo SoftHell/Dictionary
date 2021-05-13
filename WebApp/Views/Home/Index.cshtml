@@ -1,21 +1,30 @@
 ﻿@model WebApp.ViewModels.SearchViewModel
+
 <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-8">
         <div class="text-center heading-container">
             <span class="company-logo-heading display-4 main-heading" style="left: 40px;">W</span>
-            <img src="https://i.pinimg.com/originals/a4/48/f0/a448f012ac2681e47ebdd86aaf8a274a.gif" height="30%" width="30%" alt="geometric-shape-gif">
+            <img src="https://i.pinimg.com/originals/a4/48/f0/a448f012ac2681e47ebdd86aaf8a274a.gif" height="40%" width="30%" alt="geometric-shape-gif">
             <span class="company-logo-heading display-4 main-heading" style="left: 10px;">r</span>
             <span class="company-logo-heading display-4 main-heading" style="left: 70px;">d</span>
             <span class="company-logo-heading display-4 main-heading" style="left: 130px;">y</span>
 
-            <h2>@Resources.Views.Home.Index.Estonian_English_Estonian_Dict</h2>
+            <h2 class="padded home-subheading">@Resources.Views.Home.Index.Estonian_English_Estonian_Dict</h2>
         </div>
-        <div class="col-md-10 col-sm-10 info-box container d-grid gap-4 mx-auto form-box">
+        <form asp-action="Search">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="input-group mb-3 search-bar">
+                <input asp-for="KeyWord" type="text" class="form-control search-input" placeholder="@Resources.Views.Home.Index.InsertKeyword">
+                <span><button class="search-button" type="submit"><img src="css/img/search.svg" alt="search-icon" class="icon"/></button></span>
+                <span asp-validation-for="KeyWord" class="text-danger"></span>
+            </div>
+        </form>
+        @*<div class="col-md-10 col-sm-10 info-box container d-grid gap-4 mx-auto form-box">
             <form asp-action="Search">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="mb-3 form-group">
-                    <label asp-for="KeyWord" for="insertKeyword" class="form-label">@Resources.Views.Home.Index.InsertKeyword</label>
+                    @*<label asp-for="KeyWord" for="insertKeyword" class="form-label">@Resources.Views.Home.Index.InsertKeyword</label>
                     <input asp-for="KeyWord" type="text" class="form-control" id="insertKeyword">
                     <span asp-validation-for="KeyWord" class="text-danger"></span>
                 </div>
@@ -40,7 +49,7 @@
                     <div class="col-1"></div>
                 </div>
             </form>
-        </div>
+        </div>*@
     </div>
     <div class="col-sm-2"></div>
 </div>
