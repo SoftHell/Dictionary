@@ -88,15 +88,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create New.
-        /// </summary>
-        public static string CreateNew {
-            get {
-                return ResourceManager.GetString("CreateNew", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
@@ -129,6 +120,15 @@ namespace Resources {
         public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        public static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
             }
         }
         

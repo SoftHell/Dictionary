@@ -422,7 +422,7 @@ namespace DAL.Migrations
                     b.HasOne("Domain.Word", "QueryWord")
                         .WithMany("Equivalents")
                         .HasForeignKey("QueryWordId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Topic", "Topic")
                         .WithMany()

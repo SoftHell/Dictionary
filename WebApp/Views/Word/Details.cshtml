@@ -1,12 +1,12 @@
-@model Domain.Word
+@using Resources.Views.Word
+@model WebApp.ViewModels.WordViewModel
 
 @functions
 {
-    public int GetRowNo(int i)
+    private static int GetRowNo(int i)
     {
         return ++i;
     }
-
 }
 
 <div class="row">
@@ -16,30 +16,57 @@
 
     <h1 class="col-sm-10 detail-heading">@Html.DisplayFor(model => model.Value)</h1>
 
-    <a class="col-sm-1" asp-action="Edit" asp-route-id="@Model.Id">
+    <a class="col-sm-1" asp-action="Edit" asp-route-id="@Model.Word!.Id">
         <img src="/css/img/pencil.svg" alt="edit-icon" class="icon icon-right">
     </a>
 </div>
 <div>
-    <h4>
-        @Model.PartOfSpeech!.Name
+    <h4 class="subheading text-center">
+        @Model.Word!.PartOfSpeech?.Name
     </h4>
 </div>
 
 <hr/>
-<h2 class="pronunciation-text text-center">/@Html.DisplayFor(model => model.Pronunciation)/</h2>
-<div>
-    <dl class="row">
 
-        @if (Model.Equivalents != null)
+@if (Model.Pronunciation != null)
+{
+    <h2 class="subheading text-center">/@Html.DisplayFor(model => model.Pronunciation)/</h2>
+}
+
+<div>
+    <form asp-action="AddEquivalent">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Word!.Id"/>
+        <input type="hidden" asp-for="Word!.LanguageId"/>
+        <div class="input-group mb-3">
+            <input type="text" asp-for="@Model.Equivalent" class="form-control" placeholder="@Create.AddEquivalent" aria-label="New Equivalent" aria-describedby="basic-addon2">
+            <input class="input-group-text input button" type="submit" id="basic-addon2" value="+"/>
+                
+        </div>
+        <span asp-validation-for="Equivalent" class="text-danger"></span>
+    </form>
+
+    <dl class="row">
+        @if (Model.Word!.Equivalents != null)
         {
             const int rowNo = 0;
-            @foreach (var item in Model.Equivalents)
+            @foreach (var item in Model.Word!.Equivalents)
             {
-                <dt>@GetRowNo(rowNo)</dt>
-                <dd>@Html.DisplayFor(modelItem => item.Value)</dd>
+                <dt class="col-sm-2">
+                    @GetRowNo(rowNo). @Html.DisplayFor(modelItem => item.Value)
+                </dt>
+                <dd class="col-sm-10">
+                    <span>
+                        <a class="col-sm-1" asp-action="Delete" asp-route-id="@item.Id">
+                            <img src="/css/img/trash.svg" alt="delete-icon" class="icon icon-right">
+                        </a>
+                    </span>
+                </dd>
             }
         }
+    </dl>
+    <dl class="row">
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Explanation)
         </dt>

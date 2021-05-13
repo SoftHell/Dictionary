@@ -125,7 +125,7 @@ h1, .nav-item, .nav-link {
 }
 
 .content-container {
-  background: rgba(200,200,180,0.9);
+  background: rgba(227, 227, 227, 0.9);
 }
 
 
@@ -195,8 +195,8 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   
 }
 
-.pronunciation-text {
-  color: #4e555b;
+.subheading {
+  color: #8d8d8d;
   font-style: italic;
 }
 

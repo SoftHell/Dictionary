@@ -26,9 +26,6 @@
     <data name="Insert" xml:space="preserve">
         <value>Sisesta</value>
     </data>
-    <data name="CreateNew" xml:space="preserve">
-        <value>Loo uus</value>
-    </data>
     <data name="Create" xml:space="preserve">
         <value>Loo</value>
     </data>
@@ -40,5 +37,8 @@
     </data>
     <data name="Index" xml:space="preserve">
         <value>Sõnastik</value>
+    </data>
+    <data name="Select" xml:space="preserve">
+        <value>Vali</value>
     </data>
 </root>

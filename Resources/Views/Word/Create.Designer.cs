@@ -97,6 +97,24 @@ namespace Resources.Views.Word {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create New.
+        /// </summary>
+        public static string CreateNew {
+            get {
+                return ResourceManager.GetString("CreateNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a New Word Or Phrase.
+        /// </summary>
+        public static string CreateWord {
+            get {
+                return ResourceManager.GetString("CreateWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In English.
         /// </summary>
         public static string EnglishValue {
@@ -160,7 +178,7 @@ namespace Resources.Views.Word {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Insert a New Word or Phrase.
+        ///   Looks up a localized string similar to Insert Word or Phrase.
         /// </summary>
         public static string InsertNewWord {
             get {
@@ -178,7 +196,7 @@ namespace Resources.Views.Word {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Part of Speech.
+        ///   Looks up a localized string similar to Word type.
         /// </summary>
         public static string PartOfSpeech {
             get {
@@ -196,11 +214,38 @@ namespace Resources.Views.Word {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Language.
+        /// </summary>
+        public static string SelectLanguage {
+            get {
+                return ResourceManager.GetString("SelectLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source Language.
         /// </summary>
         public static string SourceLanguage {
             get {
                 return ResourceManager.GetString("SourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify Content.
+        /// </summary>
+        public static string SpecifyContent {
+            get {
+                return ResourceManager.GetString("SpecifyContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify Context.
+        /// </summary>
+        public static string SpecifyContext {
+            get {
+                return ResourceManager.GetString("SpecifyContext", resourceCulture);
             }
         }
         
@@ -228,6 +273,15 @@ namespace Resources.Views.Word {
         public static string Value {
             get {
                 return ResourceManager.GetString("Value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Word/Phrase.
+        /// </summary>
+        public static string WordPhrase {
+            get {
+                return ResourceManager.GetString("WordPhrase", resourceCulture);
             }
         }
     }

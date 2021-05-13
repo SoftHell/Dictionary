@@ -84,8 +84,8 @@ namespace DAL.DataInit
             
             var languagesEt = new[]
             {
-                "inglise keel",
-                "eesti keel"
+                "inglise",
+                "eesti"
             };
 
             for (var i = 0; i < languagesEn.Length; i++)
@@ -204,8 +204,8 @@ namespace DAL.DataInit
             
             var wordsEt = new[]
             {
-                "inglise keel",
-                "eesti keel",
+                "inglise",
+                "eesti",
                 
             };
 

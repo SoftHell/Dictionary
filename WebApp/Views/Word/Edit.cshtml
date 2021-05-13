@@ -1,47 +1,46 @@
 @model Domain.Word
 
-@{
-    ViewData["Title"] = "Edit";
-}
-
 <h1>Edit</h1>
 
 <h4>Word</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Id"/>
             <div class="form-group">
                 <label asp-for="Value" class="control-label"></label>
-                <input asp-for="Value" class="form-control" />
+                <input asp-for="Value" class="form-control"/>
                 <span asp-validation-for="Value" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Example" class="control-label"></label>
-                <input asp-for="Example" class="form-control" />
+                <input asp-for="Example" class="form-control"/>
                 <span asp-validation-for="Example" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Explanation" class="control-label"></label>
-                <input asp-for="Explanation" class="form-control" />
+                <input asp-for="Explanation" class="form-control"/>
                 <span asp-validation-for="Explanation" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Pronunciation" class="control-label"></label>
-                <input asp-for="Pronunciation" class="form-control" />
+                <input asp-for="Pronunciation" class="form-control"/>
                 <span asp-validation-for="Pronunciation" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Equivalents" class="control-label"></label>
-                @foreach (var item in Model.Equivalents!)
+                @if (Model.Equivalents != null)
                 {
-                    <div>@item.Value</div>
+                    @foreach (var item in Model.Equivalents!)
+                    {
+                        <div>@item.Value</div>
+                    }
                 }
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary"/>
             </div>
         </form>
     </div>

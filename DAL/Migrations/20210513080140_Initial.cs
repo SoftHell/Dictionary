@@ -283,7 +283,8 @@ namespace DAL.Migrations
                         name: "FK_Words_Words_QueryWordId",
                         column: x => x.QueryWordId,
                         principalTable: "Words",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

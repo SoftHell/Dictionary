@@ -1,4 +1,30 @@
+@using Domain
 @model IEnumerable<Domain.Word>
+
+@functions
+{
+    private static string DisplayEquivalents(Word word)
+    {
+        if (word.Equivalents == null)
+        {
+            return string.Empty;
+        }
+        var equivalents = "";
+
+        foreach (var eq in word.Equivalents)
+        {
+            if (!equivalents.Equals(""))
+            {
+                equivalents += ", " + eq.Value;
+            }
+            else
+            {
+                equivalents += eq.Value;
+            }
+        }
+        return equivalents;
+    }
+}
 
 
 <h1>@Resources.CRUDCommon.Index</h1>
@@ -11,33 +37,33 @@
 
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Value)
+    <tr class="row">
+        <th class="col-sm-4">
+            @Resources.Views.Word.Create.WordPhrase
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QueryWord)
+        <th class="col-sm-6">
+            @Resources.Views.Word.Create.Equivalents
         </th>
-        <th></th>
+        <th class="col-sm-2"></th>
     </tr>
     </thead>
     <tbody>
     @foreach (var item in Model)
     {
-        @if (item.QueryWordId != null)
+        if (item.Equivalents != null)
         {
-            <tr>
+            <tr class="row">
                 <td class="col-sm-4">
                     <div>
-                        <a class="index-heading" asp-action="Details" asp-route-id="@item.Id">
+                        <a asp-action="Details" asp-route-id="@item.Id">
                             @Html.DisplayFor(modelItem => item.Value)
                         </a>
                     </div>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QueryWord!.Value)
+                <td class="col-sm-6">
+                    @DisplayEquivalents(item)
                 </td>
-                <td>
+                <td class="col-sm-2">
                     <a asp-action="Delete" asp-route-id="@item.Id">
                         <img src="/css/img/trash.svg" alt="add-icon" class="icon icon-right">
                     </a>

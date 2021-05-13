@@ -54,7 +54,7 @@
         <value>Lähtekeel</value>
     </data>
     <data name="InsertNewWord" xml:space="preserve">
-        <value>Sisesta uus sõna või fraas</value>
+        <value>Sisesta sõna või fraas</value>
     </data>
     <data name="InsertEquivalent" xml:space="preserve">
         <value>Sisesta vaste</value>
@@ -67,5 +67,23 @@
     </data>
     <data name="AddEquivalent" xml:space="preserve">
         <value>Lisa vaste</value>
+    </data>
+    <data name="CreateNew" xml:space="preserve">
+        <value>Loo uus</value>
+    </data>
+    <data name="CreateWord" xml:space="preserve">
+        <value>Lisa uus sõna või fraas</value>
+    </data>
+    <data name="SpecifyContext" xml:space="preserve">
+        <value>Täpsusta konteksti</value>
+    </data>
+    <data name="SpecifyContent" xml:space="preserve">
+        <value>Täpsusta sisu</value>
+    </data>
+    <data name="SelectLanguage" xml:space="preserve">
+        <value>Vali keel</value>
+    </data>
+    <data name="WordPhrase" xml:space="preserve">
+        <value>Sõna/fraas</value>
     </data>
 </root>

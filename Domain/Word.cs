@@ -13,7 +13,9 @@ namespace Domain
         [MaxLength(64, ErrorMessageResourceName = "ErrorMessage_MaxLength", ErrorMessageResourceType = typeof(Resources.Common))]
         public string Value { get; set; } = default!;
 
+        [Display(ResourceType = typeof(Resources.Views.Word.Create), Name = nameof(Language))]
         public Guid LanguageId { get; set; }
+        
         [Display(ResourceType = typeof(Resources.Views.Word.Create), Name = nameof(Language))]
         public Language? Language { get; set; } = default!;
         

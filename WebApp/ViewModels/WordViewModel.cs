@@ -13,12 +13,14 @@ namespace WebApp.ViewModels
 
         public Word Word { get; set; } = new();
         
-        public Guid? QueryWordId { get; set; }
-
         [Display(ResourceType = typeof(Resources.Views.Word.Create), Name = "InsertNewWord")]
         [MinLength(1, ErrorMessageResourceName = "ErrorMessage_MinLength", ErrorMessageResourceType = typeof(Resources.Common))]
         [MaxLength(64, ErrorMessageResourceName = "ErrorMessage_MaxLength", ErrorMessageResourceType = typeof(Resources.Common))]
         public string? Value { get; set; } = default!;
+        
+        [Display(ResourceType = typeof(Resources.Views.Word.Create), Name = "InsertEquivalent")]
+        [MaxLength(64, ErrorMessageResourceName = "ErrorMessage_MaxLength", ErrorMessageResourceType = typeof(Resources.Common))]
+        public string? Equivalent { get; set; } = default!;
         
         [Display(ResourceType = typeof(Resources.Views.Word.Create), Name = nameof(Explanation))]
         [MaxLength(1024, ErrorMessageResourceName = "ErrorMessage_MaxLength", ErrorMessageResourceType = typeof(Resources.Common))]

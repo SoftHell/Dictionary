@@ -38,17 +38,7 @@ namespace DAL
             
             builder.Entity<Translation>()
                 .HasKey(k => new { k.Culture, k.LangStringId});
-            
-            builder.Entity<Word>()
-                .HasOne(l => l.QueryWord)
-                .WithMany(b => b!.Equivalents)
-                .HasForeignKey(l => l.QueryWordId)
-                .OnDelete(DeleteBehavior.NoAction);
-            
 
         }
-        
-        
     }
-    
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210512082218_Initial")]
+    [Migration("20210513080140_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -424,7 +424,7 @@ namespace DAL.Migrations
                     b.HasOne("Domain.Word", "QueryWord")
                         .WithMany("Equivalents")
                         .HasForeignKey("QueryWordId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Topic", "Topic")
                         .WithMany()

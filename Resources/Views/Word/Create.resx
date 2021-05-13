@@ -25,7 +25,7 @@
         <value>Language</value>
     </data>
     <data name="PartOfSpeech" xml:space="preserve">
-        <value>Part of Speech</value>
+        <value>Word type</value>
     </data>
     <data name="Explanation" xml:space="preserve">
         <value>Explanation</value>
@@ -61,7 +61,7 @@
         <value>Source Language</value>
     </data>
     <data name="InsertNewWord" xml:space="preserve">
-        <value>Insert a New Word or Phrase</value>
+        <value>Insert Word or Phrase</value>
     </data>
     <data name="InsertEquivalent" xml:space="preserve">
         <value>Insert an Equivalent</value>
@@ -74,5 +74,23 @@
     </data>
     <data name="AddEquivalent" xml:space="preserve">
         <value>Add Equivalent</value>
+    </data>
+    <data name="CreateNew" xml:space="preserve">
+        <value>Create New</value>
+    </data>
+    <data name="CreateWord" xml:space="preserve">
+        <value>Add a New Word Or Phrase</value>
+    </data>
+    <data name="SpecifyContext" xml:space="preserve">
+        <value>Specify Context</value>
+    </data>
+    <data name="SpecifyContent" xml:space="preserve">
+        <value>Specify Content</value>
+    </data>
+    <data name="SelectLanguage" xml:space="preserve">
+        <value>Select Language</value>
+    </data>
+    <data name="WordPhrase" xml:space="preserve">
+        <value>Word/Phrase</value>
     </data>
 </root>

@@ -1,54 +1,62 @@
-@using Domain
+@using Resources.Views.Word
 @model WebApp.ViewModels.WordViewModel
 
-<h1>@Resources.CRUDCommon.CreateNew</h1>
 
-<h4>@Resources.Views.DTONames.Word</h4>
-<hr />
+<h1>@Create.CreateWord</h1>
+
+<hr/>
+
 <div class="row">
     <div class="col-md-8">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="input-group mb-3">
-                <select type="text" class="form-control" placeholder="@Resources.Views.Word.Create.PartOfSpeech" asp-for="Word!.LanguageId" asp-items="Model.LanguageSelectList">
-                    @*<option value="">@Resources.CRUDCommon.SelectItem</option>*@
-                </select>
-                
+            <div class="form-group d-grid gap-2 col-3 mx-auto btn-group" role="group" aria-label="Language selection">
+                <select type="text" class="form-control btn-success btn" asp-for="Word!.LanguageId" asp-items="Model.LanguageSelectList"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="Word!.Value" class="control-label"></label>
-                <input asp-for="Word!.Value" class="form-control" placeholder="@Resources.Views.Word.Create.InsertNewWord"/>
-                <span asp-validation-for="Value" class="text-danger"></span>
+            <div class="form-box">
+                <div class="form-group input-group-lg">
+                    <span class="input-group-text"></span>
+                    <input asp-for="Word!.Value" class="form-control" placeholder="@Create.InsertNewWord"/>
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>
+                <div class="form-group input-group-lg">
+                    <span class="input-group-text"></span>
+                    <input asp-for="Equivalent" class="form-control" placeholder="@Create.InsertEquivalent"/>
+                    <span asp-validation-for="Equivalent" class="text-danger"></span>
+                </div>
+
+                <div class="input-group mb-3" id="context-explain">
+                    <select type="text" class="form-control" placeholder="@Create.PartOfSpeech" asp-for="Word!.PartOfSpeechId" asp-items="Model.PartOfSpeechSelectList">
+                        <option value="">--- @Resources.CRUDCommon.Select @Create.PartOfSpeech.ToLower() ---</option>
+                    </select>
+                    <select type="text" class="form-control" placeholder="@Create.Topic" asp-for="Word!.TopicId" asp-items="Model.TopicSelectList">
+                        <option value="">--- @Resources.CRUDCommon.Select @Create.Topic.ToLower() ---</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Word!.Example" class="control-label"></label>
+                    <textarea asp-for="Word!.Example" class="form-control"></textarea>
+                    <span asp-validation-for="Example" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Word!.Explanation" class="control-label"></label>
+                    <textarea asp-for="Word!.Explanation" class="form-control"></textarea>
+                    <span asp-validation-for="Explanation" class="text-danger"></span>
+                </div>
             </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text">@Resources.Views.Word.Create.PartOfSpeech</span>
-                <select type="text" class="form-control" placeholder="@Resources.Views.Word.Create.PartOfSpeech" asp-for="Word!.PartOfSpeechId" asp-items="Model.PartOfSpeechSelectList">
-                    <option value="">@Resources.CRUDCommon.SelectItem</option>
-                </select>
-                <span class="input-group-text">@Resources.Views.Word.Create.Topic</span>
-                <select type="text" class="form-control" placeholder="@Resources.Views.Word.Create.Topic" asp-for="Word!.TopicId" asp-items="Model.TopicSelectList">
-                    <option value="">@Resources.CRUDCommon.SelectItem</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Word!.Example" class="control-label"></label>
-                <textarea asp-for="Word!.Example" class="form-control"></textarea>
-                <span asp-validation-for="Example" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Word!.Explanation" class="control-label"></label>
-                <textarea asp-for="Word!.Explanation" class="form-control"></textarea>
-                <span asp-validation-for="Explanation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="@Resources.Views.Word.Create.Continue" class="btn btn-primary"/>
+            <div class="form-group padded row">
+                <div class="col-sm-3">
+                    <a class="btn btn-outline-info" asp-action="Index">@Resources.CRUDCommon.Back</a>
+                </div>
+                <div class="col-sm-6"></div>
+                <div class="col-sm-3">
+                    <input class="btn btn-info" type="submit" value="@Resources.CRUDCommon.Submit"/>
+                </div>
             </div>
         </form>
     </div>
 </div>
-<div>
-    <a asp-action="Index">@Resources.CRUDCommon.BackToList</a>
-</div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
