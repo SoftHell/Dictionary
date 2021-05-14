@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using DAL;
+using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebApp.Models;
@@ -26,9 +27,15 @@ namespace WebApp.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var vm = new SearchViewModel();
+            var vm = new SearchViewModel()
+            {
+                LanguageSelectList =
+                    new SelectList(
+                        await _context.Languages.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
+                        nameof(Language.Id), nameof(Language.Abbreviation))
+            };
             
             return View(vm);
         }

@@ -115,6 +115,15 @@ namespace Resources.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Partial Match.
+        /// </summary>
+        public static string PartialMatch {
+            get {
+                return ResourceManager.GetString("PartialMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string Search {

@@ -42,4 +42,7 @@
     <data name="Search" xml:space="preserve">
         <value>Search</value>
     </data>
+    <data name="PartialMatch" xml:space="preserve">
+        <value>Partial Match</value>
+    </data>
 </root>

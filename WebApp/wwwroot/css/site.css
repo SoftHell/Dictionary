@@ -224,9 +224,16 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   border-bottom-right-radius: 20rem;
   border-top-right-radius: 20rem;
   padding: 20px;
-  background-color: #ff5f13;
+  background-color: white;
+  /*background-color: #ff5f13;*/ // orange
   box-shadow: none;
 }
+.exact-match-check {
+  all: unset;
+  background-color: white;
+  padding: 20px;
+}
+
 .search-input {
   all: unset;
   padding: 10px;
@@ -234,11 +241,51 @@ url(/WebApp/wwwroot/css/fonts/beachsunshine/beachsunshine.ttf) format("opentype"
   border-radius: 20rem;
 }
 
+.search-bar-lang-input {
+  all: unset;
+  padding: 10px;
+  background-color: white;
+  height: 44px;
+}
+.search-bar-lang-input:hover {
+  opacity: 0.8;
+}
+
 .home-subheading {
   text-shadow: 1px 1px 5px #838383;
 }
 
+.radio-button-area{
+  padding-left: 30px;
+}
 
+input[type='radio']:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 3px solid white;
+}
+
+input[type='radio']:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #ff5f13;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 3px solid white;
+}
 
 /*====================== ICON BUTTONS =======================*/
 

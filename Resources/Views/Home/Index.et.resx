@@ -35,4 +35,7 @@
     <data name="Search" xml:space="preserve">
         <value>Otsi</value>
     </data>
+    <data name="PartialMatch" xml:space="preserve">
+        <value>Osaline vaste</value>
+    </data>
 </root>
