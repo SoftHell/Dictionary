@@ -70,6 +70,24 @@ namespace Resources.Views.Word {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string English {
+            get {
+                return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estonian.
+        /// </summary>
+        public static string Estonian {
+            get {
+                return ResourceManager.GetString("Estonian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Source Language.
         /// </summary>
         public static string SelectLang {

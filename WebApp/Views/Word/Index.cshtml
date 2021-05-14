@@ -1,14 +1,28 @@
 @using BLL
 @using Microsoft.AspNetCore.Identity
-@model IEnumerable<Domain.Word>
+@model WebApp.ViewModels.WordIndexViewModel
 @inject SignInManager<IdentityUser> SignInManager
 
-<h1>@Resources.CRUDCommon.Index</h1>
+<div class="text-center">
+    <h1>
+        <span>@Model.FromLanguage.ToUpper()</span>
+        <span>
+            <a asp-action="Index" asp-route-lang="@Model.ToELanguage" class="btn btn-sm btn-light">
+                <img src="/css/img/arrows-switch.svg" alt="switch-icon" class="icon icon-lg">
+            </a>
+        </span>
+        <span>@Model.ToLanguage.ToUpper()</span>
+    </h1>
+</div>
+
 @if (SignInManager.IsSignedIn(User))
 {
     <p>
-        <a asp-action="Create">
-            <img src="/css/img/plus.svg" alt="add-icon" class="icon icon-lg">
+        <a asp-action="Create" class="icon-plus">
+            @*<img src="/css/img/plus.svg" alt="add-icon" class="icon icon-lg">*@
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
         </a>
     </p>
 }
@@ -26,31 +40,28 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Words)
         {
-            if (item.Equivalents != null)
-            {
-                <tr class="row">
-                    <td class="col-sm-5">
-                        <div>
-                            <a asp-action="Details" asp-route-id="@item.Id">
-                                @Html.DisplayFor(modelItem => item.Value)
-                            </a>
-                        </div>
-                    </td>
-                    <td class="col-sm-6">
-                        @LogicHelp.DisplayEquivalents(item)
-                    </td>
-                    <td class="col-sm-1">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <a asp-action="Delete" asp-route-id="@item.Id">
-                                <img src="/css/img/trash.svg" alt="add-icon" class="icon icon-right">
-                            </a>
-                        }
-                    </td>
-                </tr>
-            }
+            <tr class="row">
+                <td class="col-sm-5">
+                    <div>
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            @Html.DisplayFor(modelItem => item.Value)
+                        </a>
+                    </div>
+                </td>
+                <td class="col-sm-6">
+                    @LogicHelp.DisplayQueryWordAndEquivalents(item)
+                </td>
+                <td class="col-sm-1">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <img src="/css/img/trash.svg" alt="add-icon" class="icon icon-right">
+                        </a>
+                    }
+                </td>
+            </tr>
         }
         </tbody>
     </table>

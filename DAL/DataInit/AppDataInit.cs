@@ -12,11 +12,11 @@ namespace DAL.DataInit
         public static async Task SeedAppData(AppDbContext ctx)
         {
 
-            AddPartsOfSpeech(ctx);
+            /*AddPartsOfSpeech(ctx);
             
             AddLanguages(ctx);
             
-            AddTopics(ctx);
+            AddTopics(ctx);*/
             
             await AddWords(ctx);
             
@@ -208,15 +208,16 @@ namespace DAL.DataInit
                     Value = en,
                     LanguageId = eng.Id
                 };
-                var word = ctx.Words.Add(wordEn);
+                var dbWordEn = ctx.Words.Add(wordEn);
             
                 var wordEt = new Word
                 {
                     Value = et,
                     LanguageId = est.Id,
-                    QueryWordId = word.Entity.Id
+                    QueryWordId = dbWordEn.Entity.Id
                 };
-                ctx.Words.Add(wordEt);
+                var dbWordEt = ctx.Words.Add(wordEt);
+                dbWordEn.Entity.Equivalents = new List<Word> {dbWordEt.Entity};
             }
             
             Translator("Ema", "Mother");

@@ -330,6 +330,10 @@ input[type='radio']:checked:after {
   float: right;
 }
 
+.icon-plus {
+  color: #39852b;
+}
+
 
 /*==========================================================*/
 /*============== SIZE RESPONSIVE ELEMENTS ==================*/

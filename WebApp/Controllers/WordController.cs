@@ -24,16 +24,38 @@ namespace WebApp.Controllers
 
         [AllowAnonymous]
         // GET: Word
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(ELanguage lang)
         {
+            
+            var fromLanguage = await _context.Languages
+                .Include(x => x.Name)
+                .ThenInclude(n => n.Translations)
+                .Where(l => l.Abbreviation == lang).FirstOrDefaultAsync();
+            
+            var toLanguage = await _context.Languages
+                .Include(x => x.Name)
+                .ThenInclude(n => n.Translations)
+                .Where(l => l.Abbreviation != lang).FirstOrDefaultAsync();
+            
             var words = await _context.Words
                 .Include(w => w.QueryWord)
+                .Include(w => w.Equivalents)
+                .Where(w => w.LanguageId == fromLanguage.Id)
                 .ToListAsync();
 
             words = words.OrderBy(x => x.Value).ToList();
-            return View(words);
+            var vm = new WordIndexViewModel()
+            {
+                Words = words,
+                FromLanguageId = fromLanguage.Id,
+                FromLanguage = fromLanguage.Name,
+                ToELanguage = toLanguage.Abbreviation,
+                ToLanguage = toLanguage.Name
+            };
+            return View(vm);
         }
-
+        
+        
         [AllowAnonymous]
         // GET: Word/Details/5
         public async Task<IActionResult> Details(Guid? id)

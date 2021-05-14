@@ -24,4 +24,10 @@
     <data name="SelectLang" xml:space="preserve">
         <value>Select Source Language</value>
     </data>
+    <data name="Estonian" xml:space="preserve">
+        <value>Estonian</value>
+    </data>
+    <data name="English" xml:space="preserve">
+        <value>English</value>
+    </data>
 </root>
