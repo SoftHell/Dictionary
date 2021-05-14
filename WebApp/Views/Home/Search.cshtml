@@ -1,38 +1,36 @@
-﻿@model IEnumerable<Domain.Word>
+﻿@using BLL
+@model IEnumerable<Domain.Word>
 
 
 <h1>@Resources.CRUDCommon.Index</h1>
 
 <table class="table">
     <thead>
-    <tr>
-        <th>
+    <tr class="row">
+        <th class="col-sm-4">
             @Html.DisplayNameFor(model => model.Value)
         </th>
-        <th>
+        <th class="col-sm-8">
             @Html.DisplayNameFor(model => model.QueryWord)
         </th>
-        <th></th>
     </tr>
     </thead>
     <tbody>
     @foreach (var item in Model)
     {
-        @if (item.QueryWordId != null)
-        {
-            <tr>
-                <td class="col-sm-4">
-                    <div>
-                        <a class="index-heading" asp-controller="Word" asp-action="Details" asp-route-id="@item.Id">
-                            @Html.DisplayFor(modelItem => item.Value)
-                        </a>
-                    </div>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QueryWord!.Value)
-                </td>
-            </tr>
-        }
+        <tr class="row">
+            <td class="col-sm-4">
+                <div>
+                    <a class="index-heading" asp-controller="Word" asp-action="Details" asp-route-id="@item.Id">
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </a>
+                </div>
+            </td>
+            <td class="col-sm-8">
+                @LogicHelp.DisplayQueryWordAndEquivalents(item)
+            </td>
+        </tr>
+        
     }
     </tbody>
 </table>

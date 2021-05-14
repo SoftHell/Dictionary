@@ -1,4 +1,5 @@
-﻿@model WebApp.ViewModels.SearchViewModel
+﻿@using Domain
+@model WebApp.ViewModels.SearchViewModel
 
 <div class="row">
     <div class="col-sm-2"></div>
@@ -14,10 +15,11 @@
         </div>
         <form asp-action="Search">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <span asp-validation-for="KeyWord" class="text-danger"></span>
             <div class="input-group mb-3 search-bar">
                 <input asp-for="KeyWord" type="text" class="form-control search-input" placeholder="@Resources.Views.Home.Index.InsertKeyword">
                 <span>
-                    <select type="text" class="form-control search-bar-lang-input" asp-for="LanguageId" asp-items="Model.LanguageSelectList"></select>
+                    <select type="text" class="search-bar-lang-input form-control " asp-for="LanguageId" asp-items="Model.LanguageSelectList"></select>
                 </span>
                 <span>
                     <button class="search-button" type="submit">
@@ -26,21 +28,22 @@
                 </span>
                 <span asp-validation-for="KeyWord" class="text-danger"></span>
             </div>
-
-
-            <div class="radio-button-area">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        @Resources.Views.Home.Index.ExactMatch
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        @Resources.Views.Home.Index.PartialMatch
-                    </label>
-                </div>
+            <div class="pad-left-lg" aria-label="match-exactness-choice" id="match-exactness-choice">
+                <label class="pad-up-decreased h6" for="match-exactness-choice">@Resources.Views.Home.Index.SearchExactness:</label>
+                <span class="match-choices">
+                    <div class="form-check form-check-inline">
+                        <input asp-for="MatchExactness" class="form-check-input check-size" type="radio" value="@EMatchExactness.Exact" checked>
+                        <label class="form-check-label">@Resources.Views.Home.Index.Exact</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input asp-for="MatchExactness" class="form-check-input check-size" type="radio" value="@EMatchExactness.Fuzzy">
+                        <label class="form-check-label">@Resources.Views.Home.Index.Fuzzy</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input asp-for="MatchExactness" class="form-check-input check-size" type="radio" value="@EMatchExactness.Partial">
+                        <label class="form-check-label">@Resources.Views.Home.Index.Partial</label>
+                    </div>
+                </span>
             </div>
         </form>
     </div>

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL;
 using DAL;
 using Domain;
 using Microsoft.AspNetCore.Http;
@@ -45,24 +47,55 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Search(string? keyWord)
+        public async Task<IActionResult> Search(SearchViewModel vm)
         {
-            if (keyWord == null || keyWord.Trim().Equals(string.Empty))
+            if (vm.KeyWord.Equals(default) || vm.KeyWord.Equals(string.Empty))
             {
-                var appDbContext = await _context.Words
-                    .Include(w => w.QueryWord)
-                    .ToListAsync();
-                return View(appDbContext);
+                var result = new List<Word>();
+                return View(result);
             }
-            else
+
+            var word = vm.KeyWord!.Trim().ToLower();
+            
+            if (vm.MatchExactness.Equals(EMatchExactness.Exact.ToString()))
             {
-                var appDbContext = await _context.Words
+                var result = await _context.Words
                     .Include(w => w.QueryWord)
-                    .Where(x => x.Value.Contains(keyWord!))
+                    .Include(w => w.Equivalents)
+                    .Where(x => x.LanguageId.Equals(vm.LanguageId))
+                    .Where(x => x.Value.ToLower().Equals(word))
                     .ToListAsync();
-                return View(appDbContext);
+                return View(result);
             }
+
+            if (vm.MatchExactness.Equals(EMatchExactness.Fuzzy.ToString()))
+            {
+                var result = await _context.Words
+                    .Include(w => w.QueryWord)
+                    .Include(w => w.Equivalents)
+                    .Where(x => x.LanguageId.Equals(vm.LanguageId))
+                    .ToListAsync();
+
+                var fuzzyFilteredRes = result.Where(res => LogicHelp.LevenshteinDistance(res.Value.Trim().ToLower(), vm.KeyWord) < 3).ToList();
+
+                return View(fuzzyFilteredRes);
+                
+            }
+
+            if (!vm.MatchExactness.Equals(EMatchExactness.Partial.ToString())) return View();
+            {
+                var result = await _context.Words
+                    .Include(w => w.QueryWord)
+                    .Include(w => w.Equivalents)
+                    .Where(x => x.LanguageId.Equals(vm.LanguageId))
+                    .Where(x => x.Value.ToLower().Contains(vm.KeyWord))
+                    .ToListAsync();
+                
+                return View(result);
+            }
+
         }
+        
         
         public IActionResult Privacy()
         {

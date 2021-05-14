@@ -38,4 +38,19 @@
     <data name="PartialMatch" xml:space="preserve">
         <value>Osaline vaste</value>
     </data>
+    <data name="Exact" xml:space="preserve">
+        <value>Täpne</value>
+    </data>
+    <data name="Partial" xml:space="preserve">
+        <value>Osaline</value>
+    </data>
+    <data name="Fuzzy" xml:space="preserve">
+        <value>Hägune</value>
+    </data>
+    <data name="Match" xml:space="preserve">
+        <value>Vaste:</value>
+    </data>
+    <data name="SearchExactness" xml:space="preserve">
+        <value>Otsingu täpsus</value>
+    </data>
 </root>

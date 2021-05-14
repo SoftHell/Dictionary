@@ -88,11 +88,29 @@ namespace Resources.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exact.
+        /// </summary>
+        public static string Exact {
+            get {
+                return ResourceManager.GetString("Exact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exact Match.
         /// </summary>
         public static string ExactMatch {
             get {
                 return ResourceManager.GetString("ExactMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fuzzy.
+        /// </summary>
+        public static string Fuzzy {
+            get {
+                return ResourceManager.GetString("Fuzzy", resourceCulture);
             }
         }
         
@@ -115,6 +133,24 @@ namespace Resources.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Match:.
+        /// </summary>
+        public static string Match {
+            get {
+                return ResourceManager.GetString("Match", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Partial.
+        /// </summary>
+        public static string Partial {
+            get {
+                return ResourceManager.GetString("Partial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Partial Match.
         /// </summary>
         public static string PartialMatch {
@@ -129,6 +165,15 @@ namespace Resources.Views.Home {
         public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Match.
+        /// </summary>
+        public static string SearchExactness {
+            get {
+                return ResourceManager.GetString("SearchExactness", resourceCulture);
             }
         }
         

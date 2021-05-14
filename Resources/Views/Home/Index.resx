@@ -45,4 +45,19 @@
     <data name="PartialMatch" xml:space="preserve">
         <value>Partial Match</value>
     </data>
+    <data name="Exact" xml:space="preserve">
+        <value>Exact</value>
+    </data>
+    <data name="Partial" xml:space="preserve">
+        <value>Partial</value>
+    </data>
+    <data name="Fuzzy" xml:space="preserve">
+        <value>Fuzzy</value>
+    </data>
+    <data name="Match" xml:space="preserve">
+        <value>Match:</value>
+    </data>
+    <data name="SearchExactness" xml:space="preserve">
+        <value>Search Match</value>
+    </data>
 </root>
