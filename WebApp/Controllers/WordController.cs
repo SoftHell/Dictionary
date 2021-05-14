@@ -23,8 +23,12 @@ namespace WebApp.Controllers
         // GET: Word
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Words.Include(w => w.QueryWord);
-            return View(await appDbContext.ToListAsync());
+            var words = await _context.Words
+                .Include(w => w.QueryWord)
+                .ToListAsync();
+
+            words = words.OrderBy(x => x.Value).ToList();
+            return View(words);
         }
 
         // GET: Word/Details/5
