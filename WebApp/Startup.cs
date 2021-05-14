@@ -147,15 +147,15 @@ namespace WebApp
             });
         }
 
-        private static void SetupAppData(IApplicationBuilder app, IConfiguration configuration)
+        private static async void SetupAppData(IApplicationBuilder app, IConfiguration configuration)
         {
             using var serviceScope =
                 app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
-            using var ctx = serviceScope.ServiceProvider.GetService<AppDbContext>();
+            await using var ctx = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
             if (!configuration.GetValue<bool>("AppData:SeedData")) return;
             Console.Write("Seed database");
-            AppDataInit.SeedAppData(ctx!);
+            await AppDataInit.SeedAppData(ctx!);
             Console.WriteLine(" - done");
         }
     }

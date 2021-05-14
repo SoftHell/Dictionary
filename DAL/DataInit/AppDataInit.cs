@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.DataInit
 {
     public static class AppDataInit
     {
-        public static void SeedAppData(AppDbContext ctx)
+        public static async Task SeedAppData(AppDbContext ctx)
         {
 
             AddPartsOfSpeech(ctx);
@@ -14,9 +18,9 @@ namespace DAL.DataInit
             
             AddTopics(ctx);
             
-            //AddWords(ctx);
+            await AddWords(ctx);
             
-            ctx.SaveChanges();
+            await ctx.SaveChangesAsync();
         }
 
         private static void AddPartsOfSpeech(AppDbContext ctx)
@@ -192,46 +196,125 @@ namespace DAL.DataInit
             }
         }
         
-        private static void AddWords(AppDbContext ctx)
+        private static async Task AddWords(AppDbContext ctx)
         {
-            var wordsEn = new[]
-            {
-                "English",
-                "Estonian",
-                
+            var eng = await ctx.Languages.Where(x => x.Abbreviation.Equals(ELanguage.En)).FirstOrDefaultAsync();
+            var est = await ctx.Languages.Where(x => x.Abbreviation.Equals(ELanguage.Et)).FirstOrDefaultAsync();
 
-            };
+            void Translator(string et, string en)
+            {
+                var wordEn = new Word
+                {
+                    Value = en,
+                    LanguageId = eng.Id
+                };
+                var word = ctx.Words.Add(wordEn);
             
-            var wordsEt = new[]
-            {
-                "inglise",
-                "eesti",
-                
-            };
-
-            for (var i = 0; i < wordsEn.Length; i++)
-            {
-                var langString = new LangString {Translations = new List<Translation>()};
-                var translationEn = new Translation
+                var wordEt = new Word
                 {
-                    Value = wordsEn[i],
-                    Culture = "en"
+                    Value = et,
+                    LanguageId = est.Id,
+                    QueryWordId = word.Entity.Id
                 };
-                var translationEt = new Translation
-                {
-                    Value = wordsEt[i],
-                    Culture = "et"
-                };
-                langString.Translations.Add(translationEn);
-                langString.Translations.Add(translationEt);
-
-                var word = new Word()
-                {
-                    Value = langString
-                };
-                ctx.Words.Add(word);
+                ctx.Words.Add(wordEt);
             }
             
+            Translator("Ema", "Mother");
+            Translator("Isa", "Father");
+            Translator("Õde", "Sister");
+            Translator("Vend", "Brother");
+            Translator("Vanaisa", "Grandfather");
+            Translator("Vanaema", "Grandmother");
+            Translator("Tädi", "Aunt");
+            Translator("Onu", "Uncle");
+            Translator("Nõbu", "Cousin");
+            Translator("Õepoeg", "Nephew");
+            Translator("Õetütar", "Niece");
+            Translator("Vennapoeg", "Nephew");
+            Translator("Vennatütar", "Niece");
+            Translator("Koer", "Dog");
+            Translator("Kass", "Cat");
+            Translator("Katus", "Roof");
+            Translator("Sõnaosav", "Eloquent");
+            Translator("Mitmedimensioonilie", "Multidimensional");
+            Translator("Saladuslik", "Mysterious");
+            Translator("Loomulik", "Natural");
+            Translator("Kallis", "Expensive");
+            Translator("Tõetruu", "Believable");
+            Translator("Ettevõtlik", "Entrepreneurial");
+            Translator("Karakter", "Character");
+            Translator("Valmisolek", "Willingness");
+            Translator("Maraton", "Marathon");
+            Translator("Hägune", "Fuzzy");
+            Translator("Osaline", "Partial");
+            Translator("Täpne", "Exact");
+            Translator("Ratastool", "Wheelchair");
+            Translator("Reisimine", "Travelling");
+            Translator("Puhkus", "Vacation");
+            Translator("Suvi", "Summer");
+            Translator("Sügis", "Autumn");
+            Translator("Talv", "Winter");
+            Translator("Kevad", "Spring");
+            Translator("Esmaspäev", "Monday");
+            Translator("Teisipäev", "Tuesday");
+            Translator("Kolmapäev", "Wednesday");
+            Translator("Neljapäev", "Thursday");
+            Translator("Reede", "Friday");
+            Translator("Laupäev", "Saturday");
+            Translator("Pühapäev", "Sunday");
+            Translator("Kohvi", "Coffee");
+            Translator("Kohvik", "Cafe");
+            Translator("Restoran", "Restaurant");
+            Translator("Piknik", "Picnic");
+            Translator("Pitsa", "Pizza");
+            Translator("Kino", "Cinema");
+            Translator("Paismais", "Popcorn");
+            Translator("Paraku", "Alas");
+            Translator("Armastama", "To love");
+            Translator("Metsik", "Wild");
+            Translator("Mets", "Forest");
+            Translator("Vihmamets", "Rainforest");
+            Translator("Vihm", "Rain");
+            Translator("Päike", "Sun");
+            Translator("Äike", "Thunder");
+            Translator("Püksid", "Pants");
+            Translator("Kampsun", "Sweater");
+            Translator("T-särk", "T-shirt");
+            Translator("Sokid", "Socks");
+            Translator("Laev", "Ship");
+            Translator("Rong", "Train");
+            Translator("Auto", "Car");
+            Translator("Vesi", "Water");
+            Translator("Õhk", "Air");
+            Translator("Majakas", "Beacon");
+            Translator("Laine", "Wave");
+            Translator("Ujumine", "Swimming");
+            Translator("Tantsimine", "Dancing");
+            Translator("Sõudmine", "Rowing");
+            Translator("Jooksmine", "Running");
+            Translator("Sörkimine", "Jogging");
+            Translator("Suusatamine", "Skiing");
+            Translator("Kelgutamine", "Sledding");
+            Translator("Uisutamine", "Skating");
+            Translator("Toit", "Food");
+            Translator("Jook", "Drink");
+            Translator("Söömine", "Eating");
+            Translator("Joomine", "Drinking");
+            Translator("Tarbimine", "Consuming");
+            Translator("Teater", "Theater");
+            Translator("Kontsert", "Concert");
+            Translator("Film", "Movie");
+            Translator("Orkester", "Orchestra");
+            Translator("Sümfoonia", "Symphony");
+            Translator("Klaver", "Piano");
+            Translator("Viiul", "Violin");
+            Translator("Tšello", "Cello");
+            Translator("Oboe", "Oboe");
+            Translator("Akordion", "Accordion");
+            Translator("Võlukunst", "Magic");
+            Translator("Võlur", "Wizard");
+
         }
+
     }
 }
