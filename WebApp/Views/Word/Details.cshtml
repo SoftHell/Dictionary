@@ -1,21 +1,30 @@
 @using Resources.Views.Word
+@using Microsoft.AspNetCore.Identity
 @model WebApp.ViewModels.WordViewModel
+@inject SignInManager<IdentityUser> SignInManager
 
 <div class="row">
+
     <a class="col-sm-1" asp-action="Index">
         <img src="/css/img/arrow-left.svg" alt="back-icon" class="icon icon-lg">
     </a>
 
     <h1 class="col-sm-10 detail-heading highlighted-heading">@Html.DisplayFor(model => model.Value)</h1>
-
-    <a class="col-sm-1" asp-action="Edit" asp-route-id="@Model.Word!.Id">
-        <img src="/css/img/pencil.svg" alt="edit-icon" class="icon icon-right">
-    </a>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a class="col-sm-1" asp-action="Edit" asp-route-id="@Model.Word!.Id">
+            <img src="/css/img/pencil.svg" alt="edit-icon" class="icon icon-right">
+        </a>
+    }
 </div>
 <div>
-    <h4 class="subheading text-center">
-        @Model.Word!.PartOfSpeech?.Name
-    </h4>
+    @if (Model.Word.PartOfSpeechId != null)
+    {
+        <h4 class="subheading text-center">
+            @Model.Word!.PartOfSpeech?.Name
+        </h4>
+    }
+
 </div>
 
 <hr/>
@@ -34,27 +43,32 @@
                 <li class="h4">
                     @Html.DisplayFor(modelItem => item.Value)
                     <span>
-                        <a class="col-sm-1" asp-action="Delete" asp-route-id="@item.Id">
-                            <img src="/css/img/trash.svg" alt="delete-icon" class="icon icon-right">
-                        </a>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <a class="col-sm-1" asp-action="Delete" asp-route-id="@item.Id">
+                                <img src="/css/img/trash.svg" alt="delete-icon" class="icon icon-right">
+                            </a>
+                        }
                     </span>
                 </li>
             }
         }
     </ul>
-    
+
     <hr/>
-    
-    <form asp-action="AddEquivalent">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Word!.Id"/>
-        <input type="hidden" asp-for="Word!.LanguageId"/>
-        <div class="input-group mb-3">
-            <input type="text" asp-for="Equivalent" class="form-control" placeholder="@Create.AddEquivalent" aria-label="New Equivalent" aria-describedby="basic-addon2">
-            <input type="submit" class="input-group-text font-size-lg font-bold btn-info"  id="basic-addon2" value="+"/>
-        </div>
-        <span asp-validation-for="Equivalent" class="text-danger"></span>
-    </form>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <form asp-action="AddEquivalent">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Word!.Id"/>
+            <input type="hidden" asp-for="Word!.LanguageId"/>
+            <div class="input-group mb-3">
+                <input type="text" asp-for="Equivalent" class="form-control" placeholder="@Create.AddEquivalent" aria-label="New Equivalent" aria-describedby="basic-addon2">
+                <input type="submit" class="input-group-text font-size-lg font-bold btn-info" id="basic-addon2" value="+"/>
+            </div>
+            <span asp-validation-for="Equivalent" class="text-danger"></span>
+        </form>
+    }
     <dl class="row">
 
         @if (Model.Word.Explanation != null)

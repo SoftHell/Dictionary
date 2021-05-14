@@ -31,12 +31,15 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var vm = new SearchViewModel()
+            var vm = new SearchViewModel
             {
                 LanguageSelectList =
                     new SelectList(
-                        await _context.Languages.Include(x => x.Name).ThenInclude(n => n.Translations).ToListAsync(),
-                        nameof(Language.Id), nameof(Language.Abbreviation))
+                        await _context.Languages
+                            .Include(x => x.Name)
+                            .ThenInclude(n => n.Translations)
+                            .ToListAsync(),
+                        nameof(Language.Id), nameof(Language.Name))
             };
             
             return View(vm);
@@ -93,9 +96,7 @@ namespace WebApp.Controllers
                 
                 return View(result);
             }
-
         }
-        
         
         public IActionResult Privacy()
         {

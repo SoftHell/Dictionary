@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DAL;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class WordController : Controller
     {
         private readonly AppDbContext _context;
@@ -20,6 +22,7 @@ namespace WebApp.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         // GET: Word
         public async Task<IActionResult> Index()
         {
@@ -31,6 +34,7 @@ namespace WebApp.Controllers
             return View(words);
         }
 
+        [AllowAnonymous]
         // GET: Word/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -66,6 +70,7 @@ namespace WebApp.Controllers
             return View(vm);
         }
 
+        
         // GET: Word/Create
         public async Task<IActionResult> Create()
         {
@@ -229,10 +234,9 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            var vm = new WordDeleteViewModel()
+            var vm = new WordDeleteViewModel
             {
                 Word = word,
-
             };
 
             return View(vm);
