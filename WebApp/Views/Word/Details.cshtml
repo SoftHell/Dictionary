@@ -1,5 +1,6 @@
 @using Resources.Views.Word
 @using Microsoft.AspNetCore.Identity
+@using BLL
 @model WebApp.ViewModels.WordViewModel
 @inject SignInManager<IdentityUser> SignInManager
 
@@ -36,23 +37,22 @@
 
 <div class="form-box">
     <ul>
-        @if (Model.Word!.Equivalents != null)
+
+        @foreach (var item in LogicHelp.CreateEquivalentList(Model.Word))
         {
-            @foreach (var item in Model.Word!.Equivalents)
-            {
-                <li class="h4">
-                    @Html.DisplayFor(modelItem => item.Value)
-                    <span>
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <a class="col-sm-1" asp-action="Delete" asp-route-id="@item.Id">
-                                <img src="/css/img/trash.svg" alt="delete-icon" class="icon icon-right">
-                            </a>
-                        }
-                    </span>
-                </li>
-            }
+            <li class="h4">
+                @Html.DisplayFor(modelItem => item.Value)
+                <span>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a class="col-sm-1" asp-action="Delete" asp-route-id="@item.Id">
+                            <img src="/css/img/trash.svg" alt="delete-icon" class="icon icon-right">
+                        </a>
+                    }
+                </span>
+            </li>
         }
+        
     </ul>
 
     <hr/>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Domain;
 
@@ -113,6 +114,25 @@ namespace BLL
             // Step 7
             return d[n, m];
         }
-    
+
+        public static List<Word> CreateEquivalentList(Word word)
+        {
+            if (word.Equivalents == null && word.QueryWord == null)
+            {
+                return new List<Word>();
+            }
+
+            var equivalents = word.Equivalents!.ToList();
+
+            if (word.QueryWord == null)
+            {
+                return equivalents;
+            }
+
+            equivalents.Add(word.QueryWord);
+
+            return equivalents;
+            
+        }
     }
 }
