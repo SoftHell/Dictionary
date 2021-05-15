@@ -1,0 +1,40 @@
+﻿@using BLL
+@using Microsoft.AspNetCore.Identity
+@model WebApp.ViewModels.Test.TestViewModel
+
+<h1>TEST</h1>
+
+
+<div class="form-box">
+    <table class="table">
+        <thead>
+        <tr class="row">
+            <th class="col-sm-5">
+                @Resources.Views.Word.Create.WordPhrase
+            </th>
+            <th class="col-sm-6">
+                @Resources.Views.Word.Create.Equivalents
+            </th>
+            <th class="col-sm-1"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Words)
+        {
+            <tr class="row">
+                <td class="col-sm-5">
+                    <div>
+                            @Html.DisplayFor(modelItem => item.Value)
+                    </div>
+                </td>
+                <td class="col-sm-6">
+                    @LogicHelp.DisplayQueryWordAndEquivalents(item)
+                </td>
+                <td class="col-sm-1">
+                    
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

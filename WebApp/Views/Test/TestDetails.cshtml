@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BLL
+@model Domain.Word
+@inject SignInManager<IdentityUser> SignInManager
+
+<div class="row">
+
+    <h1 class="col-sm-10 detail-heading highlighted-heading">TEST: @Html.DisplayFor(model => model.Value)</h1>
+    
+</div>
+<div>
+    @if (Model.PartOfSpeechId != null)
+    {
+        <h4 class="subheading text-center">
+            @Model.PartOfSpeech?.Name
+        </h4>
+    }
+</div>
+<hr/>
+
+@if (Model.Pronunciation != null)
+{
+    <h2 class="subheading text-center">/@Html.DisplayFor(model => model.Pronunciation)/</h2>
+}
+
+<div class="form-box">
+    <ul>
+
+        @foreach (var item in LogicHelp.CreateEquivalentList(Model))
+        {
+            <li class="h4">
+                @Html.DisplayFor(modelItem => item.Value)
+                <span>
+                </span>
+            </li>
+        }
+    </ul>
+    <hr/>
+    <dl class="row">
+        @if (Model.Explanation != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Explanation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Explanation)
+            </dd>
+        }
+        @if (Model.Example != null)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Example)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Example)
+            </dd>
+        }
+    </dl>
+</div>

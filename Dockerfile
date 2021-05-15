@@ -10,6 +10,7 @@ COPY BLL/*.csproj ./BLL/
 COPY DAL/*.csproj ./DAL/
 COPY Domain/*.csproj ./Domain/
 COPY Resources/*.csproj ./Resources/
+COPY TestProject/*.csproj ./TestProject/
 
 COPY WebApp/WebApp.csproj ./WebApp/
 
@@ -21,6 +22,7 @@ COPY BLL/. ./BLL/
 COPY DAL/. ./DAL/
 COPY Domain/. ./Domain/
 COPY Resources/. ./Resources/
+COPY TestProject/. ./TestProject/
 
 COPY WebApp/. ./WebApp/
 
