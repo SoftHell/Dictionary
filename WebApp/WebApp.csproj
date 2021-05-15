@@ -25,6 +25,8 @@
     <ItemGroup>
       <ProjectReference Include="..\DAL\DAL.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\DTO\DTO.csproj" />
+      <ProjectReference Include="..\Extensions.Base\Extensions.Base.csproj" />
       <ProjectReference Include="..\Resources\Resources.csproj" />
     </ItemGroup>
 
@@ -50,6 +52,19 @@
       <_ContentIncludedByDefault Remove="Views\Word\Edit.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Word\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Search\Results.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Views\Language\Create.cshtml" />
+      <UpToDateCheckInput Remove="Views\Language\Delete.cshtml" />
+      <UpToDateCheckInput Remove="Views\Language\Details.cshtml" />
+      <UpToDateCheckInput Remove="Views\Language\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Views\Language\Index.cshtml" />
+      <UpToDateCheckInput Remove="Views\Topic\Create.cshtml" />
+      <UpToDateCheckInput Remove="Views\Topic\Delete.cshtml" />
+      <UpToDateCheckInput Remove="Views\Topic\Details.cshtml" />
+      <UpToDateCheckInput Remove="Views\Topic\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Views\Topic\Index.cshtml" />
     </ItemGroup>
 
 </Project>

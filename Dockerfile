@@ -8,9 +8,11 @@ COPY Directory.Build.props .
 
 COPY BLL/*.csproj ./BLL/
 COPY DAL/*.csproj ./DAL/
+COPY DTO/*.csproj ./DTO/
 COPY Domain/*.csproj ./Domain/
 COPY Resources/*.csproj ./Resources/
 COPY TestProject/*.csproj ./TestProject/
+COPY Extensions.Base/*.csproj ./Extensions.Base/
 
 COPY WebApp/WebApp.csproj ./WebApp/
 
@@ -20,9 +22,11 @@ RUN dotnet restore
 # copy everything else and build app
 COPY BLL/. ./BLL/
 COPY DAL/. ./DAL/
+COPY DTO/. ./DTO/
 COPY Domain/. ./Domain/
 COPY Resources/. ./Resources/
 COPY TestProject/. ./TestProject/
+COPY Extensions.Base/. ./Extensions.Base/
 
 COPY WebApp/. ./WebApp/
 

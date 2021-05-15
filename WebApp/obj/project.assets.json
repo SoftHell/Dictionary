@@ -2363,6 +2363,30 @@
           "bin/placeholder/Domain.dll": {}
         }
       },
+      "DTO/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/DTO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DTO.dll": {}
+        }
+      },
+      "Extensions.Base/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "6.7.1",
+          "System.IdentityModel.Tokens.Jwt": "6.7.1"
+        },
+        "compile": {
+          "bin/placeholder/Extensions.Base.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Extensions.Base.dll": {}
+        }
+      },
       "Resources/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -7897,6 +7921,16 @@
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
     },
+    "DTO/1.0.0": {
+      "type": "project",
+      "path": "../DTO/DTO.csproj",
+      "msbuildProject": "../DTO/DTO.csproj"
+    },
+    "Extensions.Base/1.0.0": {
+      "type": "project",
+      "path": "../Extensions.Base/Extensions.Base.csproj",
+      "msbuildProject": "../Extensions.Base/Extensions.Base.csproj"
+    },
     "Resources/1.0.0": {
       "type": "project",
       "path": "../Resources/Resources.csproj",
@@ -7906,7 +7940,9 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "DAL >= 1.0.0",
+      "DTO >= 1.0.0",
       "Domain >= 1.0.0",
+      "Extensions.Base >= 1.0.0",
       "FontAwesome >= 4.7.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 5.0.5",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 5.0.5",
@@ -7952,6 +7988,12 @@
             },
             "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj": {
               "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj"
+            },
+            "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\DTO\\DTO.csproj": {
+              "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\DTO\\DTO.csproj"
+            },
+            "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Extensions.Base\\Extensions.Base.csproj": {
+              "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Extensions.Base\\Extensions.Base.csproj"
             },
             "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Resources\\Resources.csproj": {
               "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Resources\\Resources.csproj"
