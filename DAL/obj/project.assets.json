@@ -1548,6 +1548,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "DTO": "1.0.0",
           "Domain": "1.0.0"
         },
         "compile": {
@@ -1569,6 +1570,20 @@
         },
         "runtime": {
           "bin/placeholder/Domain.dll": {}
+        }
+      },
+      "DTO/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Domain": "1.0.0",
+          "Resources": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DTO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DTO.dll": {}
         }
       },
       "Resources/1.0.0": {
@@ -5896,6 +5911,11 @@
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
     },
+    "DTO/1.0.0": {
+      "type": "project",
+      "path": "../DTO/DTO.csproj",
+      "msbuildProject": "../DTO/DTO.csproj"
+    },
     "Resources/1.0.0": {
       "type": "project",
       "path": "../Resources/Resources.csproj",
@@ -5905,6 +5925,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "BLL >= 1.0.0",
+      "DTO >= 1.0.0",
       "Domain >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.5"
@@ -5942,6 +5963,9 @@
             },
             "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj": {
               "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj"
+            },
+            "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\DTO\\DTO.csproj": {
+              "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\DTO\\DTO.csproj"
             }
           }
         }

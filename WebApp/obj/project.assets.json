@@ -2324,6 +2324,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "DTO": "1.0.0",
           "Domain": "1.0.0"
         },
         "compile": {
@@ -2338,6 +2339,7 @@
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "BLL": "1.0.0",
+          "DTO": "1.0.0",
           "Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.5"
@@ -2366,6 +2368,10 @@
       "DTO/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Domain": "1.0.0",
+          "Resources": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/DTO.dll": {}
         },

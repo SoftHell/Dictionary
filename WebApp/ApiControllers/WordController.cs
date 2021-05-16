@@ -6,37 +6,56 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DAL;
+using DAL.Repositories;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.ApiControllers
 {
+    /// <summary>
+    /// Word Controller
+    /// </summary>
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class WordController : ControllerBase
     {
         private readonly AppDbContext _context;
-
+        private readonly WordRepository _wordRepo;
+        
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="context"></param>
         public WordController(AppDbContext context)
         {
             _context = context;
+            _wordRepo = new WordRepository(context);
         }
 
-        // GET: api/Word
+        /// <summary>
+        /// Get all the Words from DB
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Word>>> GetWords()
+        public async Task<ActionResult<IEnumerable<DTO.Word>>> GetWords()
         {
-            return await _context.Words.ToListAsync();
+            var res = await _wordRepo.GetAllAsync();
+            
+            return Ok(res);
         }
 
-        // GET: api/Word/5
+        /// <summary>
+        /// Get one word by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Word>> GetWord(Guid id)
+        public async Task<ActionResult<DTO.Word>> GetWord(Guid id)
         {
-            var word = await _context.Words.FindAsync(id);
+            var word = await _wordRepo.FirstOrDefaultAsync(id);
 
             if (word == null)
             {
@@ -46,8 +65,12 @@ namespace WebApp.ApiControllers
             return word;
         }
 
-        // PUT: api/Word/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Update a Word
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="word"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutWord(Guid id, Word word)
         {
@@ -77,8 +100,11 @@ namespace WebApp.ApiControllers
             return NoContent();
         }
 
-        // POST: api/Word
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Create a new Word
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Word>> PostWord(Word word)
         {
@@ -88,7 +114,11 @@ namespace WebApp.ApiControllers
             return CreatedAtAction("GetWord", new { id = word.Id }, word);
         }
 
-        // DELETE: api/Word/5
+        /// <summary>
+        /// Delete a Word by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWord(Guid id)
         {

@@ -75,7 +75,6 @@ namespace WebApp.ApiControllers.Identity
                     {
                         Token = jwt,
                         Email = appUser.Email,
-                        Username = appUser.UserName
                     }
                     );
             }
@@ -129,16 +128,12 @@ namespace WebApp.ApiControllers.Identity
                         {
                             Token = jwt,
                             Email = appUser.Email,
-                            Username = appUser.UserName
                         }
                     );
-                    
                 }
-
                 _logger.LogInformation("User {Email} not found after creation", appUser.Email);
                 return BadRequest(new Message("User not found after creation!"));
             }
-            
             var errors = result.Errors.Select(error => error.Description).ToList();
             return BadRequest(new Message() {Messages = errors});
         }

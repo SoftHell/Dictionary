@@ -30,6 +30,9 @@
             "projectReferences": {
               "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj": {
                 "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj"
+              },
+              "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\DTO\\DTO.csproj": {
+                "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\DTO\\DTO.csproj"
               }
             }
           }
@@ -91,6 +94,9 @@
               },
               "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj": {
                 "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj"
+              },
+              "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\DTO\\DTO.csproj": {
+                "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\DTO\\DTO.csproj"
               }
             }
           }
@@ -220,7 +226,14 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Domain\\Domain.csproj"
+              },
+              "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Resources\\Resources.csproj": {
+                "projectPath": "C:\\Users\\Kadri\\Development\\TestProjects\\kadrijogi-dictionary\\Resources\\Resources.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
