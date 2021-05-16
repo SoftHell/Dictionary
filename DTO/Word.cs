@@ -26,5 +26,7 @@ namespace DTO
         public Guid? QueryWordId { get; set; }
         
         public List<string>? Equivalents { get; set; } = default!;
+        
+        public string? EquivalentString { get; set; } = default!;
     }
 }

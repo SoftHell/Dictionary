@@ -8,10 +8,11 @@ namespace BLL
         public static DTO.Word Map(Domain.Word w)
         {
             var word = MapEntity(w);
+            word.EquivalentString = MapEquivalentsAsString(w);
             word.Equivalents = MapEquivalents(w);
             return word;
         }
-
+        
         private static DTO.Word MapEntity(Domain.Word w)
         {
             var word = new DTO.Word()
@@ -40,6 +41,25 @@ namespace BLL
             equivalents.AddRange(w.Equivalents.Select(eq => eq.Value));
 
             return equivalents;
+        }
+        
+        private static string MapEquivalentsAsString(Domain.Word w)
+        {
+            var equivalents = MapEquivalents(w);
+            var result = "";
+
+            foreach (var eq in equivalents)
+            {
+                if (result.Equals(string.Empty))
+                {
+                    result += eq.ToLower();
+                }
+                else
+                {
+                    result += ", " + eq.ToLower();
+                } 
+            }
+            return result;
         }
     }
 }

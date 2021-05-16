@@ -39,9 +39,9 @@ namespace WebApp.ApiControllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DTO.Word>>> GetWords()
+        public async Task<ActionResult<IEnumerable<DTO.Word>>> GetWords(ELanguage lang)
         {
-            var res = await _wordRepo.GetAllAsync();
+            var res = await _wordRepo.GetAllByLanguageAsync(lang);
             
             return Ok(res);
         }

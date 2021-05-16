@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL;
+using Domain;
 using DTO;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,27 @@ namespace DAL.Repositories
             var words = await _context.Words
                 .Include(w => w.QueryWord)
                 .Include(w => w.Equivalents)
+                .Select(w => WordMapper.Map(w))
+                .ToListAsync();
+
+            words = words
+                .OrderBy(x => x.Value)
+                .ToList();
+            
+            return words;
+        }
+        
+        public async Task<IEnumerable<DTO.Word>> GetAllByLanguageAsync(ELanguage lang)
+        {
+            var fromLanguage = await _context.Languages
+                .Include(x => x.Name)
+                .ThenInclude(n => n.Translations)
+                .Where(l => l.Abbreviation == lang).FirstOrDefaultAsync();
+
+            var words = await _context.Words
+                .Include(w => w.QueryWord)
+                .Include(w => w.Equivalents)
+                .Where(w => w.LanguageId == fromLanguage.Id)
                 .Select(w => WordMapper.Map(w))
                 .ToListAsync();
 
